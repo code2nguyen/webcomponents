@@ -1,0 +1,184 @@
+{
+  "version": 2,
+  "tags": [
+    {
+      "name": "dashboard-layout",
+      "description": "A component for layout widgets with a responsive grid.",
+      "properties": [
+        {
+          "name": "editable",
+          "type": "Boolean",
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "scrollableParentSelector",
+          "type": "String",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "gutterSize",
+          "type": "Number",
+          "description": "",
+          "default": "8"
+        },
+        {
+          "name": "paddingTop",
+          "type": "Number",
+          "description": "",
+          "default": "0"
+        },
+        {
+          "name": "paddingBottom",
+          "type": "Number",
+          "description": "",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "layout-change",
+          "description": "Fire whenever its items rezise/drag-drop"
+        }
+      ],
+      "slots": [],
+      "cssProperties": [
+        {
+          "name": "--dashboard-theme-color",
+          "description": "Main Theme Color",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-layout-placeholder-bg-color",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-border-color",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-icon-color",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-text-color",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-0",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-1",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-2",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-3",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-4",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-5",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-6",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-7",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-8",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-9",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-10",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-11",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-12",
+          "description": "",
+          "type": "Color"
+        },
+        {
+          "name": "--dashboard-theme-item-bg-color-code",
+          "description": "",
+          "type": "Color"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-item",
+      "description": "A placeholder of widget used by dashboard-layout",
+      "properties": [
+        { "name": "cols", "type": "Number", "description": "", "default": 3 },
+        { "name": "row", "type": "Number", "description": "", "default": 10 },
+        { "name": "order", "type": "Number", "description": "", "default": -1 },
+        { "name": "screenColumn", "type": "ScreenColumns", "description": "" },
+        {
+          "name": "currentBgColor",
+          "type": "number",
+          "description": "",
+          "default": 0
+        }
+      ],
+      "slots": [],
+      "events": []
+    },
+    {
+      "name": "quill-editor",
+      "description": "A text editor using quilljs library.",
+      "properties": [
+        { "name": "placeholder", "type": "String", "description": "" },
+        { "name": "content", "type": "Delta", "description": "" },
+        {
+          "name": "format",
+          "type": "String",
+          "description": "",
+          "default": "html"
+        }
+      ],
+      "slots": [],
+      "events": [
+        {
+          "name": "content-change",
+          "description": "Fire whenever its content changed"
+        }
+      ]
+    }
+  ]
+}

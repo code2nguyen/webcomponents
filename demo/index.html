@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Theme included stylesheets -->
+    <!-- <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet" /> -->
+
+    <!-- Core build with no theme, formatting, non-essential modules -->
+    <!-- <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet" /> -->
+    <!-- <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+    />
+    <!-- scrollbar style -->
+    <style>
+      ::-webkit-scrollbar {
+        height: 8px;
+        overflow: auto;
+        width: 8px;
+      }
+      ::-webkit-scrollbar-corner {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(245, 245, 245, 0.2);
+        border-radius: 20px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(245, 245, 245, 0.4);
+      }
+    </style>
+    <style>
+      html {
+        --dashboard-theme-color: #303236;
+
+        --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
+
+        --dashboard-theme-item-border-color: rgba(255, 255, 255, 0.3);
+        --dashboard-theme-item-icon-color: rgba(255, 255, 255);
+        --dashboard-theme-item-text-color: rgba(255, 255, 255);
+
+        --dashboard-theme-item-bg-color-0: #303236;
+        --dashboard-theme-item-bg-color-1: #5f6368;
+        --dashboard-theme-item-bg-color-2: #5c2b29;
+        --dashboard-theme-item-bg-color-3: #614a19;
+        --dashboard-theme-item-bg-color-4: #635d19;
+        --dashboard-theme-item-bg-color-5: #345920;
+        --dashboard-theme-item-bg-color-6: #16504b;
+        --dashboard-theme-item-bg-color-7: #2d555e;
+        --dashboard-theme-item-bg-color-8: #1e3a5f;
+        --dashboard-theme-item-bg-color-9: #42275e;
+        --dashboard-theme-item-bg-color-10: #5b2245;
+        --dashboard-theme-item-bg-color-11: #442f19;
+        --dashboard-theme-item-bg-color-12: #3c3f43;
+
+        --dashboard-theme-item-bg-color-code: #282c34;
+      }
+      body {
+        background-color: var(--dashboard-theme-color);
+        height: 100vh;
+        overflow: auto;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="./highlight.pack.js" lang="javascript"></script>
+    <script type="module">
+      import { html, render } from 'lit-html';
+      import '../dist/dashboard-layout.js';
+      let editable = true;
+      const toggleEditable = function () {
+        editable = !editable;
+      };
+      const layoutChangeHandler = function (event) {
+        console.log(event);
+      };
+      const contentChangeHandler = function (event) {
+        console.log(event);
+      };
+      const quillContent = `<h1>vinh</h1><p>He he</p>`;
+      render(
+        html`
+          <cff-dashboard-layout
+            editable
+            scrollableParentSelector="viewport"
+            @layout-change=${layoutChangeHandler}
+          >
+            <cff-dashboard-item>
+              <cff-quill-editor
+                format="html"
+                .content=${quillContent}
+                @content-change=${contentChangeHandler}
+              >
+              </cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+            <cff-dashboard-item>
+              <cff-quill-editor></cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+            <cff-dashboard-item>
+              <cff-quill-editor></cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+            <cff-dashboard-item>
+              <cff-quill-editor></cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+            <cff-dashboard-item>
+              <cff-quill-editor></cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+            <cff-dashboard-item>
+              <cff-quill-editor></cff-quill-editor>
+              <cff-quill-editor-toolbar
+                slot="toolbar"
+              ></cff-quill-editor-toolbar>
+            </cff-dashboard-item>
+          </cff-dashboard-layout>
+        `,
+        document.querySelector('#demo')
+      );
+    </script>
+    <div id="demo"></div>
+  </body>
+</html>
