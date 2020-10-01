@@ -2,6 +2,8 @@
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
+[Documentation](https://code2nguyen.github.io/dashboard-layout/index.html)
+
 ## Installation
 
 ```bash
