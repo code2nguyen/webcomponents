@@ -111,9 +111,11 @@ export class DashboardItem extends LitElement {
   set cols(value: number) {
     this.#cols = value;
 
-    if (value && !this.#screenColumn) {
+    if (value) {
       this.#screenColumn = initScreenColumns(this.#cols);
     }
+
+    this.requestUpdate();
   }
 
   @property({ type: Number }) rows = 10;
@@ -130,6 +132,7 @@ export class DashboardItem extends LitElement {
     } else {
       this.#screenColumn = value;
     }
+    this.requestUpdate();
   }
 
   getCols(screenSize: ScreenSize): number {

@@ -60,6 +60,7 @@ export class QuillEditor extends LitElement {
 
   connectedCallback() {
     this.style.flex = '1';
+    this.style.display = 'flex';
     super.connectedCallback();
   }
 
