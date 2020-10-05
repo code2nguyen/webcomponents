@@ -1,5 +1,5 @@
 {
-  "name": "@cff/web-components",
+  "name": "@cff/webcomponents",
   "version": "1.0.0",
   "description": "Webcomponent following open-wc recommendations",
   "main": "index.js",
