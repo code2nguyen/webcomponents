@@ -1,4 +1,4 @@
-import { css, html, LitElement, customElement } from 'lit-element';
+import { css, html, LitElement, customElement, query } from 'lit-element';
 
 @customElement('cff-calendar-clock')
 export class CalendarClock extends LitElement {
@@ -41,7 +41,7 @@ export class CalendarClock extends LitElement {
       color: var(--calender-clock-welcome-text, #ffffff);
       font-size: 48px;
       margin-bottom: 64px;
-      animation: text 2s forwards;
+      animation: text 1s forwards;
     }
     .calendar-clock-container {
       position: relative;
@@ -82,7 +82,7 @@ export class CalendarClock extends LitElement {
     }
     .bloc-time,
     .bloc-text {
-      animation: text 5s ease-out;
+      animation: text 0.5s ease-out;
     }
     .bloc-text {
       position: absolute;
@@ -178,12 +178,15 @@ export class CalendarClock extends LitElement {
     }
   `;
 
-  timeLeft = '';
-  timeCenter = '';
-  timeRight = '';
-  dateLeft = '';
-  dateCenter = '';
-  dateRight = '';
+  @query('.bloc-2') bloc2!: HTMLDivElement;
+
+  #timeLeft = '';
+  #timeCenter = '';
+  #timeRight = '';
+  #dateLeft = '';
+  #dateCenter = '';
+  #dateRight = '';
+  #isClose = false;
 
   getLocalDate() {
     return new Date()
@@ -213,39 +216,56 @@ export class CalendarClock extends LitElement {
   }
 
   start() {
+    this._updateDateTime();
     setInterval(() => {
-      const date = this.getLocalDate();
-      const time = this.getLocalTime();
-      this.dateLeft = date[0];
-      this.dateCenter = date[1];
-      this.dateRight = date[2];
-      this.timeLeft = time[0];
-      this.timeCenter = time[1];
-      this.timeRight = time[2];
-
-      this.requestUpdate();
+      this._updateDateTime();
     }, 1000);
   }
 
+  onCloseEnded = () => {
+    this.bloc2.removeEventListener('animationend', this.onCloseEnded);
+    const closedEvent = new CustomEvent('closed', {
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(closedEvent);
+  };
+
   handleClick = () => {
+    this.#isClose = !this.#isClose;
+    if (this.#isClose) {
+      this.bloc2.addEventListener('animationend', this.onCloseEnded);
+    }
     this.classList.toggle('close');
   };
+
+  private _updateDateTime() {
+    const date = this.getLocalDate();
+    const time = this.getLocalTime();
+    this.#dateLeft = date[0];
+    this.#dateCenter = date[1];
+    this.#dateRight = date[2];
+    this.#timeLeft = time[0];
+    this.#timeCenter = time[1];
+    this.#timeRight = time[2];
+    this.requestUpdate();
+  }
 
   render() {
     return html`
       <!-- <div class="welcome-text">Hello, have a good day !</div> -->
       <div class="calendar-clock-container">
         <div class="bloc bloc-1">
-          <span class="bloc-time">${this.timeLeft}</span>
-          <span class="bloc-text">${this.dateLeft}</span>
+          <span class="bloc-time">${this.#timeLeft}</span>
+          <span class="bloc-text">${this.#dateLeft}</span>
         </div>
         <div class="bloc bloc-2">
-          <span class="bloc-time">${this.timeCenter}</span>
-          <span class="bloc-text">${this.dateCenter}</span>
+          <span class="bloc-time">${this.#timeCenter}</span>
+          <span class="bloc-text">${this.#dateCenter}</span>
         </div>
         <div class="bloc bloc-3">
-          <span class="bloc-time">${this.timeRight}</span>
-          <span class="bloc-text">${this.dateRight}</span>
+          <span class="bloc-time">${this.#timeRight}</span>
+          <span class="bloc-text">${this.#dateRight}</span>
         </div>
       </div>
     `;
