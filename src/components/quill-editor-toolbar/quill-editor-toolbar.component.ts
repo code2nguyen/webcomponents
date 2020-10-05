@@ -1,8 +1,8 @@
-import { css, html, LitElement } from 'lit-element';
+import { css, customElement, html, LitElement } from 'lit-element';
 import { getElementDataAction } from '../../shared/utils';
 import { DashboardItem } from '../dashboard-item/dashboard-item.component';
 import { QuillEditor } from '../quill-editor/quill-editor.component';
-
+@customElement('cff-quill-editor-toolbar')
 export class QuillEditorToolbar extends LitElement {
   static styles = css`
     :host {

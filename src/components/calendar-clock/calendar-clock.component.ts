@@ -1,5 +1,6 @@
-import { css, html, LitElement, property } from 'lit-element';
+import { css, html, LitElement, customElement } from 'lit-element';
 
+@customElement('cff-calendar-clock')
 export class CalendarClock extends LitElement {
   static styles = css`
     :host {

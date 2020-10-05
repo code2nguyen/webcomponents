@@ -1,4 +1,11 @@
-import { html, LitElement, css, query, property } from 'lit-element';
+import {
+  html,
+  LitElement,
+  css,
+  query,
+  property,
+  customElement,
+} from 'lit-element';
 import { autoFormat } from './auto-format.plugin';
 import { createQuillEditorTheme } from './quill-editor.theme';
 import { styles } from './quill.css';
@@ -37,7 +44,7 @@ function setupQuill() {
     });
   }
 }
-
+@customElement('cff-quill-editor')
 export class QuillEditor extends LitElement {
   editor?: any;
   #Quill!: any;

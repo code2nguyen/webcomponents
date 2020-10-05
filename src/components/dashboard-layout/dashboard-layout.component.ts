@@ -5,6 +5,7 @@ import {
   property,
   TemplateResult,
   query,
+  customElement,
 } from 'lit-element';
 import {
   animationFrameScheduler,
@@ -56,6 +57,7 @@ import { DashboardItem } from '../dashboard-item/dashboard-item.component';
 
 declare const window: any;
 
+@customElement('cff-dashboard-layout')
 export class DashboardLayout extends LitElement {
   static styles = css`
     :host {

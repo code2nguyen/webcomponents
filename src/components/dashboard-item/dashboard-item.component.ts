@@ -1,4 +1,11 @@
-import { html, css, LitElement, property, TemplateResult } from 'lit-element';
+import {
+  html,
+  css,
+  LitElement,
+  property,
+  TemplateResult,
+  customElement,
+} from 'lit-element';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LayoutService } from '../../shared/layout-service';
@@ -18,6 +25,7 @@ import { ScreenSize } from '../../shared/screen-size';
 import { DashboardItemRef } from './dashboard-item-ref';
 import { DashboardLayout } from '../dashboard-layout/dashboard-layout.component';
 
+@customElement('cff-dashboard-item')
 export class DashboardItem extends LitElement {
   static styles = css`
     :host {
