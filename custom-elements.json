@@ -178,6 +178,56 @@
           "name": "content-change",
           "description": "Fire whenever its content changed"
         }
+      ],
+      "cssProperties": [
+        {
+          "name": "--quill-editor-background-color",
+          "description": "",
+          "type": "Color",
+          "default": "#282c34"
+        },
+        {
+          "name": "--quill-editor-toolbar-background-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "18, 18, 18"
+        },
+        {
+          "name": "--quill-editor-code-block-background-color",
+          "description": "",
+          "type": "Color",
+          "default": "#282c34"
+        },
+        {
+          "name": "--quill-editor-toolbar-icon-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 255, 255"
+        },
+        {
+          "name": "--quill-editor-text-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 255, 255"
+        },
+        {
+          "name": "--quill-editor-font-size",
+          "description": "",
+          "type": "FontSize",
+          "default": "15px"
+        },
+        {
+          "name": "--quill-editor-text-font",
+          "description": "",
+          "type": "Font-Family",
+          "default": "RedHatText"
+        },
+        {
+          "name": "--quill-editor-text-display-font",
+          "description": "",
+          "type": "Font-Family",
+          "default": "RedHatDisplay"
+        }
       ]
     }
   ]

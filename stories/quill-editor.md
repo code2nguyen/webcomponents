@@ -15,8 +15,18 @@ A text editor using quilljs library.
 
 ## Features:
 
-- Tooltip
+- Toolbar
 - Syntax highlight
+
+### Syntax highlight
+
+QuillJs use [highlightjs](https://highlightjs.org/) library to parse and tokenize code blocks. The easiest way is use CDN, example
+
+```js
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+<!-- Include the highlight.js library -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+```
 
 ```js preview-story
 export const Demo = () => html`
@@ -25,61 +35,71 @@ export const Demo = () => html`
     href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
   />
   <style>
-    ::-webkit-scrollbar {
-      height: 8px;
-      overflow: auto;
-      width: 8px;
+    @font-face {
+      font-family: 'RedHatDisplay';
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot');
+      /* IE9 Compat Modes */
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot?#iefix')
+          format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff')
+          format('woff');
+      /* Modern Browsers */
+      font-style: normal;
+      font-weight: 300;
+      text-rendering: optimizeLegibility;
     }
-    ::-webkit-scrollbar-corner {
-      background: transparent;
+
+    @font-face {
+      font-family: 'RedHatDisplay';
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot');
+      /* IE9 Compat Modes */
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot?#iefix')
+          format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff')
+          format('woff');
+      /* Modern Browsers */
+      font-style: normal;
+      font-weight: 400;
+      text-rendering: optimizeLegibility;
     }
 
-    ::-webkit-scrollbar-thumb {
-      background-color: rgba(245, 245, 245, 0.2);
-      border-radius: 20px;
+    @font-face {
+      font-family: 'RedHatDisplay';
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot');
+      /* IE9 Compat Modes */
+      src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot?#iefix')
+          format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff')
+          format('woff');
+      /* Modern Browsers */
+      font-style: normal;
+      font-weight: 700;
+      text-rendering: optimizeLegibility;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(245, 245, 245, 0.4);
+    @font-face {
+      font-family: 'RedHatText';
+      src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot');
+      /* IE9 Compat Modes */
+      src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/RedHatText/RedHatText-Regular.woff') format('woff');
+      /* Modern Browsers */
+      font-style: normal;
+      font-weight: 400;
+      text-rendering: optimizeLegibility;
     }
-  </style>
-  <style>
-    html {
-      --dashboard-theme-color: #303236;
 
-      --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
-
-      --dashboard-theme-item-border-color: rgba(255, 255, 255, 0.3);
-      --dashboard-theme-item-icon-color: rgba(255, 255, 255);
-      --dashboard-theme-item-text-color: rgba(255, 255, 255);
-
-      --dashboard-theme-item-bg-color-0: #303236;
-      --dashboard-theme-item-bg-color-1: #5f6368;
-      --dashboard-theme-item-bg-color-2: #5c2b29;
-      --dashboard-theme-item-bg-color-3: #614a19;
-      --dashboard-theme-item-bg-color-4: #635d19;
-      --dashboard-theme-item-bg-color-5: #345920;
-      --dashboard-theme-item-bg-color-6: #16504b;
-      --dashboard-theme-item-bg-color-7: #2d555e;
-      --dashboard-theme-item-bg-color-8: #1e3a5f;
-      --dashboard-theme-item-bg-color-9: #42275e;
-      --dashboard-theme-item-bg-color-10: #5b2245;
-      --dashboard-theme-item-bg-color-11: #442f19;
-      --dashboard-theme-item-bg-color-12: #3c3f43;
-
-      --dashboard-theme-item-bg-color-code: #282c34;
-    }
-    body {
-      background-color: var(--dashboard-theme-color);
-      height: 100vh;
-      overflow: auto;
-      padding: 0;
-      margin: 0;
-      width: 100%;
+    @font-face {
+      font-family: 'RedHatText';
+      src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot');
+      /* IE9 Compat Modes */
+      src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/RedHatText/RedHatText-Medium.woff') format('woff');
+      /* Modern Browsers */
+      font-style: normal;
+      font-weight: 700;
+      text-rendering: optimizeLegibility;
     }
   </style>
   <cff-quill-editor
-    style="display:flex; width: 100%; height: 100%; min-height: 300px"
+    style="min-height: 300px"
     placeholder="let's start writing..."
   ></cff-quill-editor>
 `;
@@ -128,61 +148,72 @@ export const HtmlContent = () => {
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
     />
     <style>
-      ::-webkit-scrollbar {
-        height: 8px;
-        overflow: auto;
-        width: 8px;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
       }
-      ::-webkit-scrollbar-corner {
-        background: transparent;
+
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background-color: rgba(245, 245, 245, 0.2);
-        border-radius: 20px;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(245, 245, 245, 0.4);
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatText/RedHatText-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
       }
-    </style>
-    <style>
-      html {
-        --dashboard-theme-color: #303236;
 
-        --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
-
-        --dashboard-theme-item-border-color: rgba(255, 255, 255, 0.3);
-        --dashboard-theme-item-icon-color: rgba(255, 255, 255);
-        --dashboard-theme-item-text-color: rgba(255, 255, 255);
-
-        --dashboard-theme-item-bg-color-0: #303236;
-        --dashboard-theme-item-bg-color-1: #5f6368;
-        --dashboard-theme-item-bg-color-2: #5c2b29;
-        --dashboard-theme-item-bg-color-3: #614a19;
-        --dashboard-theme-item-bg-color-4: #635d19;
-        --dashboard-theme-item-bg-color-5: #345920;
-        --dashboard-theme-item-bg-color-6: #16504b;
-        --dashboard-theme-item-bg-color-7: #2d555e;
-        --dashboard-theme-item-bg-color-8: #1e3a5f;
-        --dashboard-theme-item-bg-color-9: #42275e;
-        --dashboard-theme-item-bg-color-10: #5b2245;
-        --dashboard-theme-item-bg-color-11: #442f19;
-        --dashboard-theme-item-bg-color-12: #3c3f43;
-
-        --dashboard-theme-item-bg-color-code: #282c34;
-      }
-      body {
-        background-color: var(--dashboard-theme-color);
-        height: 100vh;
-        overflow: auto;
-        padding: 0;
-        margin: 0;
-        width: 100%;
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatText/RedHatText-Medium.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
       }
     </style>
     <cff-quill-editor
-      style="display:flex; width: 100%; height: 100%; min-height: 300px"
       placeholder="let's start writing..."
       format="html"
       .content=${htmlContent}
@@ -205,57 +236,69 @@ export const JsonContent = () => {
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
     />
     <style>
-      ::-webkit-scrollbar {
-        height: 8px;
-        overflow: auto;
-        width: 8px;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
       }
-      ::-webkit-scrollbar-corner {
-        background: transparent;
+
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background-color: rgba(245, 245, 245, 0.2);
-        border-radius: 20px;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(245, 245, 245, 0.4);
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatText/RedHatText-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
       }
-    </style>
-    <style>
-      html {
-        --dashboard-theme-color: #303236;
 
-        --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
-
-        --dashboard-theme-item-border-color: rgba(255, 255, 255, 0.3);
-        --dashboard-theme-item-icon-color: rgba(255, 255, 255);
-        --dashboard-theme-item-text-color: rgba(255, 255, 255);
-
-        --dashboard-theme-item-bg-color-0: #303236;
-        --dashboard-theme-item-bg-color-1: #5f6368;
-        --dashboard-theme-item-bg-color-2: #5c2b29;
-        --dashboard-theme-item-bg-color-3: #614a19;
-        --dashboard-theme-item-bg-color-4: #635d19;
-        --dashboard-theme-item-bg-color-5: #345920;
-        --dashboard-theme-item-bg-color-6: #16504b;
-        --dashboard-theme-item-bg-color-7: #2d555e;
-        --dashboard-theme-item-bg-color-8: #1e3a5f;
-        --dashboard-theme-item-bg-color-9: #42275e;
-        --dashboard-theme-item-bg-color-10: #5b2245;
-        --dashboard-theme-item-bg-color-11: #442f19;
-        --dashboard-theme-item-bg-color-12: #3c3f43;
-
-        --dashboard-theme-item-bg-color-code: #282c34;
-      }
-      body {
-        background-color: var(--dashboard-theme-color);
-        height: 100vh;
-        overflow: auto;
-        padding: 0;
-        margin: 0;
-        width: 100%;
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot?#iefix')
+            format('embedded-opentype'), url('./assets/fonts/RedHatText/RedHatText-Medium.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
       }
     </style>
     <cff-quill-editor

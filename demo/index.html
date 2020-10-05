@@ -17,29 +17,80 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
     />
-    <!-- scrollbar style -->
+    <!-- font style -->
     <style>
-      ::-webkit-scrollbar {
-        height: 8px;
-        overflow: auto;
-        width: 8px;
-      }
-      ::-webkit-scrollbar-corner {
-        background: transparent;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot?#iefix')
+            format('embedded-opentype'),
+          url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background-color: rgba(245, 245, 245, 0.2);
-        border-radius: 20px;
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot?#iefix')
+            format('embedded-opentype'),
+          url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
       }
 
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(245, 245, 245, 0.4);
+      @font-face {
+        font-family: 'RedHatDisplay';
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot?#iefix')
+            format('embedded-opentype'),
+          url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
+      }
+
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot?#iefix')
+            format('embedded-opentype'),
+          url('./assets/fonts/RedHatText/RedHatText-Regular.woff')
+            format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
+      }
+
+      @font-face {
+        font-family: 'RedHatText';
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot');
+        /* IE9 Compat Modes */
+        src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot?#iefix')
+            format('embedded-opentype'),
+          url('./assets/fonts/RedHatText/RedHatText-Medium.woff') format('woff');
+        /* Modern Browsers */
+        font-style: normal;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
       }
     </style>
     <style>
       html {
-        --dashboard-theme-color: #303236;
+        /* --dashboard-theme-color: #303236;
 
         --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
 
@@ -61,7 +112,7 @@
         --dashboard-theme-item-bg-color-11: #442f19;
         --dashboard-theme-item-bg-color-12: #3c3f43;
 
-        --dashboard-theme-item-bg-color-code: #282c34;
+        --dashboard-theme-item-bg-color-code: #282c34; */
       }
       body {
         background-color: var(--dashboard-theme-color);
@@ -89,59 +140,74 @@
         console.log(event);
       };
       const quillContent = `<h1>vinh</h1><p>He he</p>`;
-      render(
-        html`
-          <cff-dashboard-layout
-            editable
-            scrollableParentSelector="viewport"
-            @layout-change=${layoutChangeHandler}
-          >
-            <cff-dashboard-item>
-              <cff-quill-editor
-                format="html"
-                .content=${quillContent}
-                @content-change=${contentChangeHandler}
-              >
-              </cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-            <cff-dashboard-item>
-              <cff-quill-editor></cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-            <cff-dashboard-item>
-              <cff-quill-editor></cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-            <cff-dashboard-item>
-              <cff-quill-editor></cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-            <cff-dashboard-item>
-              <cff-quill-editor></cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-            <cff-dashboard-item>
-              <cff-quill-editor></cff-quill-editor>
-              <cff-quill-editor-toolbar
-                slot="toolbar"
-              ></cff-quill-editor-toolbar>
-            </cff-dashboard-item>
-          </cff-dashboard-layout>
-        `,
-        document.querySelector('#demo')
-      );
+
+      function renderDashboard() {
+        render(
+          html`
+            <cff-dashboard-layout
+              editable
+              scrollableParentSelector="viewport"
+              @layout-change=${layoutChangeHandler}
+            >
+              <cff-dashboard-item cols="6" rows="30">
+                <cff-quill-editor
+                  format="html"
+                  .content=${quillContent}
+                  @content-change=${contentChangeHandler}
+                >
+                </cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+              <cff-dashboard-item>
+                <cff-quill-editor></cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+              <cff-dashboard-item>
+                <cff-quill-editor></cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+              <cff-dashboard-item>
+                <cff-quill-editor></cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+              <cff-dashboard-item>
+                <cff-quill-editor></cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+              <cff-dashboard-item>
+                <cff-quill-editor></cff-quill-editor>
+                <cff-quill-editor-toolbar
+                  slot="toolbar"
+                ></cff-quill-editor-toolbar>
+              </cff-dashboard-item>
+            </cff-dashboard-layout>
+          `,
+          document.querySelector('#demo')
+        );
+      }
+
+      renderDashboard();
     </script>
+
+    <!-- dashboard -->
+    <script></script>
+
+    <script>
+      function calendarClock() {
+        render(html``, document.querySelector('#demo'));
+      }
+    </script>
+    <script></script>
     <div id="demo"></div>
   </body>
 </html>

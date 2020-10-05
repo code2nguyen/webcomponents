@@ -1,3 +1,5 @@
+import { css } from 'lit-element';
+
 declare const window: any;
 
 export class Range {
@@ -7,7 +9,11 @@ export class Range {
 export function createQuillEditorTheme() {
   const BubbleTheme = window.Quill.import('themes/bubble');
   const Tooltip = window.Quill.import('ui/tooltip');
-
+  const icons = window.Quill.import('ui/icons');
+  // Override some icons
+  icons.bold = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><defs><style>.cls-1{fill:none;}.cls-2{fill:currentColor;}</style></defs><g id="Calque_2" data-name="Calque 2"><g id="Calque_1-2" data-name="Calque 1"><path class="cls-1" d="M0,0H18V18H0Z"/><path class="cls-2" d="M12.55,8.81a3.32,3.32,0,0,0,1.5-2.54,3.59,3.59,0,0,0-3.64-3.65H5.63a.91.91,0,0,0-.91.91V14.47a.91.91,0,0,0,.91.91h5.26a3.61,3.61,0,0,0,3.62-3.44A3.38,3.38,0,0,0,12.55,8.81ZM7.45,4.9h2.73a1.37,1.37,0,1,1,0,2.73H7.45Zm3.19,8.2H7.45V10.37h3.19a1.37,1.37,0,0,1,0,2.73Z"/></g></g></svg>`;
+  icons.italic = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><defs><style>.cls-1{fill:none;}.cls-2{fill:currentColor;}</style></defs><g id="Calque_2" data-name="Calque 2"><g id="Calque_1-2" data-name="Calque 1"><path class="cls-1" d="M0,0H18V18H0Z"/><path class="cls-2" d="M6.82,4A1.37,1.37,0,0,0,8.18,5.36h.65L5.72,12.64H4.54a1.37,1.37,0,0,0,0,2.74H9.1a1.37,1.37,0,0,0,0-2.74H8.45l3.11-7.28h1.18a1.37,1.37,0,0,0,0-2.74H8.18A1.36,1.36,0,0,0,6.82,4Z"/></g></g></svg>`;
+  icons.strike = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><defs><style>.cls-1{fill:none;}.cls-2{fill:currentColor;}</style></defs><g id="Calque_2" data-name="Calque 2"><g id="Calque_1-2" data-name="Calque 1"><path class="cls-1" d="M0,0H18V18H0Z"/><path class="cls-2" d="M8.9,15.76a1.7,1.7,0,0,0,1.7-1.7V13.2H7.2v.86A1.71,1.71,0,0,0,8.9,15.76ZM3,4.28A1.27,1.27,0,0,0,4.23,5.55h3V8.1h3.4V5.55h3a1.28,1.28,0,1,0,0-2.55H4.23A1.28,1.28,0,0,0,3,4.28ZM2.1,11.5H15.71a.85.85,0,1,0,0-1.7H2.1a.85.85,0,1,0,0,1.7Z"/></g></g></svg>`;
   const LinkTooltip = class CustomLinkTooltip extends Tooltip {
     constructor(quill: any, boundsContainer: any) {
       super(quill, boundsContainer);
@@ -118,29 +124,3 @@ export function createQuillEditorTheme() {
 
   return ThemeClass;
 }
-
-// extendToolbar(toolbar: any) {
-// this.tooltip = new LoopTooltip(this.quill, this.options.bounds);
-// this.tooltip.root.appendChild(toolbar.container);
-// // you could override Quill's icons here with yours if you want
-// this.buildButtons(
-//   [].slice.call(toolbar.container.querySelectorAll('button')),
-//   icons
-// );
-// this.buildPickers(
-//   [].slice.call(toolbar.container.querySelectorAll('select')),
-//   icons
-// );
-// }
-
-// class NewThemeTooltip extends BubbleTooltip {}
-
-// NewThemeTooltip.TEMPLATE = [
-//   '<a class="ql-close"></a>',
-//   '<div class="ql-tooltip-editor">',
-//   '<input type="text" data-formula="e=mc^2" data-link="https://yoururl.com" data-video="Embed URL">',
-//   '</div>',
-//   '<span class="ql-tooltip-arrow"></span>',
-// ].join('');
-
-// export { NewThemeTooltip, NewTheme as default };

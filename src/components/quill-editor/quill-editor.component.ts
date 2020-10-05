@@ -59,8 +59,7 @@ export class QuillEditor extends LitElement {
   @query('#quillContainer') quillContainer!: HTMLElement;
 
   connectedCallback() {
-    this.style.flex = '1';
-    this.style.display = 'flex';
+    this.classList.add('quill-editor');
     super.connectedCallback();
   }
 

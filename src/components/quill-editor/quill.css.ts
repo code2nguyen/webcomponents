@@ -1380,62 +1380,84 @@ export const styles = [
   `,
   // override
   css`
-    @font-face {
-      font-family: 'Red Hat Display';
-      src: url('assets/fonts/RedHatDisplay-Medium.ttf');
+    .quill-editor {
+      display: flex;
+      flex: 1;
+      width: 100%;
+      height: 100%;
     }
-
-    @font-face {
-      font-family: 'Red Hat Text';
-      src: url('assets/fonts/RedHatText-Regular.ttf');
+    .ql-bubble .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+      fill: none;
     }
-    @font-face {
-      font-family: 'Red Hat Text Bold';
-      src: url('assets/fonts/RedHatText-Bold.ttf');
+    .ql-bubble .ql-picker,
+    .ql-bubble .ql-toolbar .ql-picker-label.ql-active {
+      color: rgba(var(--quill-editor-toolbar-icon-color, 255, 255, 255), 0.2);
     }
-    @font-face {
-      font-family: 'Red Hat Text Italic';
-      src: url('assets/fonts/RedHatText-Italic.ttf');
+    .ql-bubble .ql-picker {
+      stroke: currentColor;
     }
-    @font-face {
-      font-family: 'Red Hat Text BoldItalic';
-      src: url('assets/fonts/RedHatText-BoldItalic.ttf');
+    .ql-bubble .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+      stroke: currentColor;
     }
-
+    .ql-bubble .ql-stroke {
+      stroke: currentColor;
+      fill: none;
+    }
+    .ql-bubble .ql-fill {
+      fill: currentColor;
+    }
     .ql-container {
-      font-family: 'Red Hat Text';
-      font-size: 15px;
-      color: var(--dashboard-theme-item-text-color);
+      font-family: var(--quill-editor-text-font, 'RedHatText');
+      font-size: var(--quill-editor-font-size, 15px);
+      font-weight: 300;
+      background-color: var(--quill-editor-background-color, #282c34);
+      color: rgb(var(--dashboard-theme-item-text-color, 255, 255, 255));
+      height: auto;
     }
     .ql-bubble *:focus {
       outline: none;
     }
     .ql-editor strong {
-      font-family: 'Red Hat Text Bold';
+      font-family: var(--quill-editor-text-font, 'RedHatText');
+      font-weight: 700;
     }
 
-    .ql-editor em {
-      font-family: 'Red Hat Text Italic';
+    /* .ql-editor em {
+      font-family: var(--quill-editor-text-font-italic, 'Red Hat Text Italic');
     }
 
     .ql-editor strong > em {
-      font-family: 'Red Hat Text BoldItalic';
+      font-family: var(
+        --quill-editor-text-font-bold-italic,
+        'Red Hat Text BoldItalic'
+      );
+    } */
+    /* .ql-editor em > strong {
+      font-family: var(
+        --quill-editor-text-font-bold-italic,
+        'Red Hat Text BoldItalic'
+      );
+    } */
+    .ql-editor h1 {
+      font-family: var(--quill-editor-text-display-font, 'RedHatDisplay');
+      font-weight: 900;
     }
-    .ql-editor em > strong {
-      font-family: 'Red Hat Text BoldItalic';
+    .ql-editor h2 {
+      font-family: var(--quill-editor-text-display-font, 'RedHatDisplay');
+      font-weight: 700;
     }
-    .ql-editor h1,
-    h2 {
-      font-family: 'Red Hat Text Display';
-    }
+
     .ql-bubble .ql-tooltip {
       border-radius: 4px;
       white-space: nowrap;
       padding: 0 12px;
-      background-color: rgb(18, 18, 18);
+      background-color: rgb(
+        var(--quill-editor-toolbar-background-color, 18, 18, 18)
+      );
     }
     .ql-bubble .ql-tooltip:not(.ql-flip) .ql-tooltip-arrow {
-      border-bottom: 6px solid rgb(18, 18, 18);
+      border-bottom: 6px solid
+        rgb(var(--quill-editor-toolbar-background-color, 18, 18, 18));
     }
 
     .ql-bubble .ql-toolbar .ql-formats:first-child {
@@ -1445,7 +1467,8 @@ export const styles = [
     .ql-bubble .ql-toolbar .ql-formats {
       margin: 12px 0px 12px 12px;
       padding-right: 12px;
-      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-right: 1px solid
+        rgba(var(--quill-editor-toolbar-icon-color, 255, 255, 255), 0.2);
     }
 
     .ql-bubble .ql-toolbar .ql-formats:last-child {
@@ -1460,7 +1483,8 @@ export const styles = [
     .ql-container a {
       color: unset;
       font-style: italic;
-      font-family: 'Red Hat Text Italic';
+      font-family: var(--quill-editor-text-font, 'RedHatText');
+      font-weight: 400;
       text-decoration: none !important;
       cursor: pointer;
     }
@@ -1516,8 +1540,8 @@ export const styles = [
       color: white;
     }
     .ql-container .ql-editor.ql-blank::before {
-      color: rgba(255, 255, 255, 0.3);
-      font-family: 'Red Hat Text Italic';
+      color: var(--quill-editor-placeholder-color, rgba(255, 255, 255, 0.3));
+      font-style: italic;
     }
     .ql-container a::before {
       content: none !important;
@@ -1530,15 +1554,36 @@ export const styles = [
       display: inline-block;
     }
     .ql-container .ql-formats button {
-      color: rgb(204, 204, 204);
+      color: var(--quill-editor-toolbar-button-color, rgba(255, 255, 255, 0.3));
       width: auto;
     }
     .ql-container .ql-formats button:hover {
-      color: rgb(255, 255, 255);
+      color: var(
+        --quill-editor-toolbar-button-color-hover,
+        rgba(255, 255, 255)
+      );
     }
     .ql-bubble .ql-editor pre.ql-syntax {
-      background-color: var(--dashboard-theme-item-bg-color-code);
+      background-color: var(--quill-editor-code-block-background, #282c34);
       border-radius: 8px;
+    }
+
+    .ql-container ::-webkit-scrollbar {
+      height: 8px;
+      overflow: auto;
+      width: 8px;
+    }
+    .ql-container ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    .ql-container ::-webkit-scrollbar-thumb {
+      background-color: rgba(245, 245, 245, 0.2);
+      border-radius: 20px;
+    }
+
+    .ql-container ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(245, 245, 245, 0.4);
     }
   `,
 ];
