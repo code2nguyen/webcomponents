@@ -25,16 +25,22 @@ export class DashboardItem extends LitElement {
       position: absolute;
       overflow: hidden;
       border-radius: 4px;
-      border: 1px solid var(--dashboard-theme-item-border-color);
-      background-color: var(--dashboard-theme-item-bg-color-0);
-      color: var(--dashboard-theme-item-text-color);
+      border: 1px solid
+        rgba(var(--dashboard-theme-item-border-color, 255, 255, 255), 0.3);
+      background-color: var(--dashboard-theme-item-bg-color-0, #303236);
+      border-color: rgba(
+        var(--dashboard-theme-item-border-color, 255, 255, 255),
+        0.2
+      );
+      transition: background-color 0.5s ease-in-out, opacity 0.3s, left 0.3s,
+        margin-top 0.3s, width 0.3s, padding-top 0.3s;
     }
-    :host(:not(.moving)) {
-      transition: opacity 0.3s, left 0.3s, margin-top 0.3s, width 0.3s,
-        padding-top 0.3s;
-    }
+    /* :host(:not(.moving)) {
+
+    } */
     :host(.moving) {
       z-index: 100;
+      transition: none;
     }
 
     .dashboard-item-content {
@@ -76,11 +82,10 @@ export class DashboardItem extends LitElement {
       opacity: 1;
     }
     .dashboard-item-toolbar .dashboard-item-toolbar-icon {
-      color: var(--dashboard-theme-item-icon-color);
+      color: rgba(var(--dashboard-theme-item-icon-color, 255, 255, 255), 0.5);
       padding: 0px 8px;
       cursor: pointer;
-      transition: opacity 0.3s ease-out 0s;
-      opacity: 0.5;
+      transition: color 0.3s ease-out 0s;
       align-self: stretch;
       display: flex;
       justify-content: center;
@@ -88,7 +93,7 @@ export class DashboardItem extends LitElement {
     }
 
     .dashboard-item-toolbar .dashboard-item-toolbar-icon:hover {
-      opacity: 1;
+      color: rgb(var(--dashboard-theme-item-icon-color, 255, 255, 255));
     }
 
     .dashboard-item-toolbar .dashboard-item-resize-handle {
@@ -100,6 +105,62 @@ export class DashboardItem extends LitElement {
     }
     .dashboard-item-toolbar .dashboard-item-toolbar-separator {
       width: 16px;
+    }
+
+    :host(.bg-0) {
+      background-color: var(--dashboard-theme-item-bg-color-0, #303236);
+      border-color: rgba(
+        var(--dashboard-theme-item-border-color, 255, 255, 255),
+        0.2
+      );
+    }
+    :host(.bg-1) {
+      background-color: var(--dashboard-theme-item-bg-color-1, #5f6368);
+      border-color: transparent;
+    }
+    :host(.bg-2) {
+      background-color: var(--dashboard-theme-item-bg-color-2, #5c2b29);
+      border-color: transparent;
+    }
+    :host(.bg-3) {
+      background-color: var(--dashboard-theme-item-bg-color-3, #614a19);
+      border-color: transparent;
+    }
+    :host(.bg-4) {
+      background-color: var(--dashboard-theme-item-bg-color-4, #635d19);
+      border-color: transparent;
+    }
+    :host(.bg-5) {
+      background-color: var(--dashboard-theme-item-bg-color-5, #345920);
+      border-color: transparent;
+    }
+    :host(.bg-6) {
+      background-color: var(--dashboard-theme-item-bg-color-6, #16504b);
+      border-color: transparent;
+    }
+    :host(.bg-7) {
+      background-color: var(--dashboard-theme-item-bg-color-7, #2d555e);
+      border-color: transparent;
+    }
+    :host(.bg-8) {
+      background-color: var(--dashboard-theme-item-bg-color-8, #1e3a5f);
+      border-color: transparent;
+    }
+    :host(.bg-9) {
+      background-color: var(--dashboard-theme-item-bg-color-9, #42275e);
+      border-color: transparent;
+    }
+    :host(.bg-10) {
+      background-color: var(--dashboard-theme-item-bg-color-10, #5b2245);
+      border-color: transparent;
+    }
+    :host(.bg-11) {
+      background-color: var(--dashboard-theme-item-bg-color-11, #442f19);
+      border-color: transparent;
+    }
+    :host(.bg-12) {
+      background-color: var(--dashboard-theme-item-bg-color-12, #3c3f43);
+      border-color: transparent;
     }
   `;
 
@@ -154,10 +215,11 @@ export class DashboardItem extends LitElement {
   get currentBgColor() {
     return this.#currentBgColor;
   }
-  set currentBgColor(value) {
+  set currentBgColor(value: number) {
     if (value !== this.#currentBgColor) {
-      this._changeBackgroundColor(value);
+      this.classList.remove(`bg-${this.currentBgColor}`);
       this.#currentBgColor = value;
+      this.classList.add(`bg-${this.currentBgColor}`);
     }
   }
 
@@ -243,7 +305,6 @@ export class DashboardItem extends LitElement {
               </svg>
             </div> -->
 
-          <!-- maximize -->
           ${this.editable
             ? html`
                 <!-- move -->
@@ -452,18 +513,10 @@ export class DashboardItem extends LitElement {
   }
 
   changeBackgroundColorIndex = () => {
+    this.classList.remove(`bg-${this.currentBgColor}`);
     this.currentBgColor = (this.#currentBgColor + 1) % this.#nbrBackgroundColor;
+    this.classList.add(`bg-${this.currentBgColor}`);
   };
-
-  private _changeBackgroundColor(colorIndex: number): void {
-    this.style.backgroundColor = `var(--dashboard-theme-item-bg-color-${colorIndex})`;
-
-    if (colorIndex === 0) {
-      this.style.borderColor = `var(--dashboard-theme-item-border-color)`;
-    } else {
-      this.style.borderColor = 'transparent';
-    }
-  }
 
   getTargetHandle(mouseEventTargets: EventTarget[]): HTMLElement | null {
     const handles = this.shadowRoot?.querySelectorAll('.scaler');

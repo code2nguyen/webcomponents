@@ -33,7 +33,7 @@
     "lint:prettier": "prettier \"**/*.js\" \"**/*.ts\" --check --ignore-path .gitignore",
     "format:prettier": "prettier \"**/*.js\" \"**/*.ts\" --write --ignore-path .gitignore",
     "storybook": "concurrently --kill-others --names tsc,storybook \"npm run tsc:watch\" \"start-storybook -s assets  --node-resolve --watch --open\"",
-    "storybook:build": "build-storybook -s assets "
+    "storybook:build": "build-storybook -s assets -o docs"
   },
   "keywords": [
     "web-components",

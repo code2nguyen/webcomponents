@@ -11,11 +11,10 @@ export class QuillEditorToolbar extends LitElement {
       align-self: stretch;
     }
     .dashboard-item-toolbar-icon {
-      color: var(--dashboard-theme-item-icon-color);
+      color: rgba(var(--dashboard-theme-item-icon-color, 255, 255, 255), 0.5);
       padding: 0px 8px;
       cursor: pointer;
-      transition: opacity 0.3s ease-out 0s;
-      opacity: 0.5;
+      transition: color 0.3s ease-out 0s;
       align-self: stretch;
       display: flex;
       justify-content: center;
@@ -23,7 +22,7 @@ export class QuillEditorToolbar extends LitElement {
     }
 
     .dashboard-item-toolbar-icon:hover {
-      opacity: 1;
+      color: rgb(var(--dashboard-theme-item-icon-color, 255, 255, 255));
     }
     .dashboard-item-toolbar-separator {
       width: 8px;

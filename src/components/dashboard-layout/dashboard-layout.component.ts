@@ -61,7 +61,7 @@ export class DashboardLayout extends LitElement {
     :host {
       display: block;
       position: relative;
-      background-color: var(--dashboard-theme-color);
+      background-color: var(--dashboard-theme-color, #303236);
       margin: 8px;
     }
 
@@ -71,7 +71,10 @@ export class DashboardLayout extends LitElement {
       overflow: hidden;
       z-index: -1;
       transition: left 0.4s, margin-top 0.4s, width 0.4s, padding-top 0.4s;
-      background-color: var(--dashboard-layout-placeholder-bg-color);
+      background-color: rgba(
+        var(--dashboard-layout-placeholder-bg-color, 255, 255, 255),
+        0.1
+      );
     }
 
     @media only screen and (max-width: 599.99px) {

@@ -20,12 +20,87 @@ A text editor using quilljs library.
 
 ### Syntax highlight
 
-QuillJs use [highlightjs](https://highlightjs.org/) library to parse and tokenize code blocks. The easiest way is use CDN, example
+QuillJs use [highlightjs](https://highlightjs.org/) library to parse and tokenize code blocks. The easiest way to inject highlighjs is using CDN.
+
+Example
 
 ```js
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
 <!-- Include the highlight.js library -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+```
+
+### Typography
+
+The default font is [Red Hat Text](https://github.com/RedHatOfficial/RedHatFont). To get started, you first include Red Hat Text font into your web application.
+
+Example:
+
+```html
+<style>
+  @font-face {
+    font-family: 'RedHatDisplay';
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot');
+    /* IE9 Compat Modes */
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.eot?#iefix')
+        format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Regular.woff')
+        format('woff');
+    /* Modern Browsers */
+    font-style: normal;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+  }
+
+  @font-face {
+    font-family: 'RedHatDisplay';
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot');
+    /* IE9 Compat Modes */
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.eot?#iefix')
+        format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Medium.woff')
+        format('woff');
+    /* Modern Browsers */
+    font-style: normal;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+  }
+
+  @font-face {
+    font-family: 'RedHatDisplay';
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot');
+    /* IE9 Compat Modes */
+    src: url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.eot?#iefix')
+        format('embedded-opentype'), url('./assets/fonts/RedHatDisplay/RedHatDisplay-Bold.woff')
+        format('woff');
+    /* Modern Browsers */
+    font-style: normal;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+  }
+
+  @font-face {
+    font-family: 'RedHatText';
+    src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot');
+    /* IE9 Compat Modes */
+    src: url('./assets/fonts/RedHatText/RedHatText-Regular.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/RedHatText/RedHatText-Regular.woff') format('woff');
+    /* Modern Browsers */
+    font-style: normal;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+  }
+
+  @font-face {
+    font-family: 'RedHatText';
+    src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot');
+    /* IE9 Compat Modes */
+    src: url('./assets/fonts/RedHatText/RedHatText-Medium.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/RedHatText/RedHatText-Medium.woff') format('woff');
+    /* Modern Browsers */
+    font-style: normal;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+  }
+</style>
 ```
 
 ```js preview-story
@@ -99,7 +174,7 @@ export const Demo = () => html`
     }
   </style>
   <cff-quill-editor
-    style="min-height: 300px"
+    style="min-height: 300px; background-color: #303236;"
     placeholder="let's start writing..."
   ></cff-quill-editor>
 `;
@@ -147,6 +222,7 @@ export const HtmlContent = () => {
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
     />
+
     <style>
       @font-face {
         font-family: 'RedHatDisplay';
@@ -214,6 +290,7 @@ export const HtmlContent = () => {
       }
     </style>
     <cff-quill-editor
+      style="background-color: #303236;"
       placeholder="let's start writing..."
       format="html"
       .content=${htmlContent}
@@ -235,6 +312,7 @@ export const JsonContent = () => {
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css"
     />
+
     <style>
       @font-face {
         font-family: 'RedHatDisplay';
@@ -302,7 +380,7 @@ export const JsonContent = () => {
       }
     </style>
     <cff-quill-editor
-      style="display:flex; width: 100%; height: 100%; min-height: 300px"
+      style="background-color: #303236; min-height: 300px"
       placeholder="let's start writing..."
       format="json"
       .content=${jsonContent}

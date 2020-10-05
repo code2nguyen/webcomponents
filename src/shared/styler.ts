@@ -50,8 +50,11 @@ export class RatioGridStyler {
       position.rowStart,
       position.rowEnd - position.rowStart
     );
-    if (!disableAnimation) {
-      item.style.transition = '';
+    if (disableAnimation) {
+      // use set timeout to make transition will be done before reset transition.
+      setTimeout(() => {
+        item.style.transition = '';
+      }, 0);
     }
   }
 

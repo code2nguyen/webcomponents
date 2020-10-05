@@ -56,33 +56,8 @@ export const Demo = () => html`
     }
   </style>
   <style>
-    html {
-      --dashboard-theme-color: #303236;
-
-      --dashboard-layout-placeholder-bg-color: rgba(255, 255, 255, 0.1);
-
-      --dashboard-theme-item-border-color: rgba(255, 255, 255, 0.3);
-      --dashboard-theme-item-icon-color: rgba(255, 255, 255);
-      --dashboard-theme-item-text-color: rgba(255, 255, 255);
-
-      --dashboard-theme-item-bg-color-0: #303236;
-      --dashboard-theme-item-bg-color-1: #5f6368;
-      --dashboard-theme-item-bg-color-2: #5c2b29;
-      --dashboard-theme-item-bg-color-3: #614a19;
-      --dashboard-theme-item-bg-color-4: #635d19;
-      --dashboard-theme-item-bg-color-5: #345920;
-      --dashboard-theme-item-bg-color-6: #16504b;
-      --dashboard-theme-item-bg-color-7: #2d555e;
-      --dashboard-theme-item-bg-color-8: #1e3a5f;
-      --dashboard-theme-item-bg-color-9: #42275e;
-      --dashboard-theme-item-bg-color-10: #5b2245;
-      --dashboard-theme-item-bg-color-11: #442f19;
-      --dashboard-theme-item-bg-color-12: #3c3f43;
-
-      --dashboard-theme-item-bg-color-code: #282c34;
-    }
     body {
-      background-color: var(--dashboard-theme-color);
+      background-color: #303236;
       height: 100vh;
       overflow: auto;
       padding: 0;

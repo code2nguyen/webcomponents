@@ -47,97 +47,104 @@
         {
           "name": "--dashboard-theme-color",
           "description": "Main Theme Color",
-          "type": "Color"
+          "type": "Color",
+          "default": "#303236"
         },
         {
           "name": "--dashboard-layout-placeholder-bg-color",
           "description": "",
-          "type": "Color"
+          "type": "RBG Color",
+          "default": "255, 255, 255"
         },
         {
           "name": "--dashboard-theme-item-border-color",
           "description": "",
-          "type": "Color"
+          "type": "RGB Color",
+          "default": "255, 255, 255"
         },
         {
           "name": "--dashboard-theme-item-icon-color",
           "description": "",
-          "type": "Color"
-        },
-        {
-          "name": "--dashboard-theme-item-text-color",
-          "description": "",
-          "type": "Color"
+          "type": "RGB Color",
+          "default": "255, 255, 255"
         },
         {
           "name": "--dashboard-theme-item-bg-color-0",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#303236"
         },
         {
           "name": "--dashboard-theme-item-bg-color-1",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#5f6368"
         },
         {
           "name": "--dashboard-theme-item-bg-color-2",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#5c2b29"
         },
         {
           "name": "--dashboard-theme-item-bg-color-3",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#614a19"
         },
         {
           "name": "--dashboard-theme-item-bg-color-4",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#635d19"
         },
         {
           "name": "--dashboard-theme-item-bg-color-5",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#345920"
         },
         {
           "name": "--dashboard-theme-item-bg-color-6",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#16504b"
         },
         {
           "name": "--dashboard-theme-item-bg-color-7",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#2d555e"
         },
         {
           "name": "--dashboard-theme-item-bg-color-8",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#1e3a5f"
         },
         {
           "name": "--dashboard-theme-item-bg-color-9",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#42275e"
         },
         {
           "name": "--dashboard-theme-item-bg-color-10",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#5b2245"
         },
         {
           "name": "--dashboard-theme-item-bg-color-11",
           "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#442f19"
         },
         {
           "name": "--dashboard-theme-item-bg-color-12",
           "description": "",
-          "type": "Color"
-        },
-        {
-          "name": "--dashboard-theme-item-bg-color-code",
-          "description": "",
-          "type": "Color"
+          "type": "Color",
+          "default": "#3c3f43"
         }
       ]
     },
@@ -180,12 +187,6 @@
         }
       ],
       "cssProperties": [
-        {
-          "name": "--quill-editor-background-color",
-          "description": "",
-          "type": "Color",
-          "default": "#282c34"
-        },
         {
           "name": "--quill-editor-toolbar-background-color",
           "description": "",

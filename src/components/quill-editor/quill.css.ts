@@ -1410,7 +1410,6 @@ export const styles = [
       font-family: var(--quill-editor-text-font, 'RedHatText');
       font-size: var(--quill-editor-font-size, 15px);
       font-weight: 300;
-      background-color: var(--quill-editor-background-color, #282c34);
       color: rgb(var(--dashboard-theme-item-text-color, 255, 255, 255));
       height: auto;
     }
@@ -1421,23 +1420,6 @@ export const styles = [
       font-family: var(--quill-editor-text-font, 'RedHatText');
       font-weight: 700;
     }
-
-    /* .ql-editor em {
-      font-family: var(--quill-editor-text-font-italic, 'Red Hat Text Italic');
-    }
-
-    .ql-editor strong > em {
-      font-family: var(
-        --quill-editor-text-font-bold-italic,
-        'Red Hat Text BoldItalic'
-      );
-    } */
-    /* .ql-editor em > strong {
-      font-family: var(
-        --quill-editor-text-font-bold-italic,
-        'Red Hat Text BoldItalic'
-      );
-    } */
     .ql-editor h1 {
       font-family: var(--quill-editor-text-display-font, 'RedHatDisplay');
       font-weight: 900;
@@ -1468,7 +1450,7 @@ export const styles = [
       margin: 12px 0px 12px 12px;
       padding-right: 12px;
       border-right: 1px solid
-        rgba(var(--quill-editor-toolbar-icon-color, 255, 255, 255), 0.2);
+        rgba(var(--quill-editor-toolbar-icon-color, 255, 255, 255), 0.1);
     }
 
     .ql-bubble .ql-toolbar .ql-formats:last-child {
@@ -1495,6 +1477,10 @@ export const styles = [
     }
     .ql-container .ql-editor .ql-syntax {
       line-height: 1.42;
+      background-color: var(
+        --quill-editor-code-block-background-color,
+        #282c34
+      );
     }
     .ql-container .ql-editor ul,
     .ql-container .ql-editor ol {
@@ -1554,7 +1540,7 @@ export const styles = [
       display: inline-block;
     }
     .ql-container .ql-formats button {
-      color: var(--quill-editor-toolbar-button-color, rgba(255, 255, 255, 0.3));
+      color: var(--quill-editor-toolbar-button-color, rgba(255, 255, 255, 0.5));
       width: auto;
     }
     .ql-container .ql-formats button:hover {
