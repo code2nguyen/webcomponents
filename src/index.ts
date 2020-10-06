@@ -3,3 +3,4 @@ export { DashboardItem } from './components/dashboard-item/dashboard-item.compon
 export { QuillEditor } from './components/quill-editor/quill-editor.component';
 export { QuillEditorToolbar } from './components/quill-editor-toolbar/quill-editor-toolbar.component';
 export { CalendarClock } from './components/calendar-clock/calendar-clock.component';
+export { SearchInput } from './components/search-input/search-input.component';

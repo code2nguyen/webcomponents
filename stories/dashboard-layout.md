@@ -1,11 +1,10 @@
 ```js script
 import { html } from '@open-wc/demoing-storybook';
-import '../dist/dashboard-layout.js';
+import '../dist/index.js';
 
 export default {
   title: 'DashboardLayout',
   component: 'dashboard-layout',
-  options: { selectedPanel: 'storybookjs/knobs/panel' },
 };
 ```
 
@@ -23,11 +22,11 @@ A component for layout widgets with a responsive grid.
 ### Installation
 
 ```bash
-yarn add @cff/dashboard-layout
+yarn add @cff/webcomponents
 ```
 
 ```js
-import '@cff/dashboard-layout/dashboard-layout.js';
+import '@cff/webcomponents/components/dashboard-layout/dashboard-layout.component.js';
 ```
 
 ```js preview-story

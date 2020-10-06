@@ -230,6 +230,60 @@
           "default": "RedHatDisplay"
         }
       ]
+    },
+    {
+      "name": "search-input",
+      "description": "A simple search input text",
+      "properties": [
+        {
+          "name": "placeholder",
+          "type": "String",
+          "description": "",
+          "default": "Search..."
+        },
+        {
+          "name": "value",
+          "type": "String",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--search-input-text-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 255, 255"
+        },
+        {
+          "name": "--search-input-text-border-color",
+          "description": "",
+          "type": "Color",
+          "default": "transparent"
+        },
+        {
+          "name": "--search-input-bg-color",
+          "description": "",
+          "type": "Color",
+          "default": "#494c52"
+        },
+        {
+          "name": "--search-input-bg--active-color",
+          "description": "",
+          "type": "Color",
+          "default": "#595c63"
+        },
+        {
+          "name": "--search-input-text-font-size",
+          "description": "",
+          "type": "Font Size",
+          "default": "16px"
+        }
+      ]
     }
   ]
 }

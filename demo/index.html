@@ -90,6 +90,7 @@
     </style>
     <style>
       body {
+        background-color: #303236;
         height: 100vh;
         overflow: auto;
         padding: 0;
@@ -118,6 +119,9 @@
       function renderDashboard() {
         render(
           html`
+            <div style="width: 500px; height: 48px; margin: 32px">
+              <cff-search-input></cff-search-input>
+            </div>
             <cff-dashboard-layout
               editable
               scrollableParentSelector="viewport"
@@ -175,8 +179,8 @@
           document.querySelector('body')
         );
       }
-      // renderDashboard();
-      calendarClock();
+      renderDashboard();
+      // calendarClock();
     </script>
 
     <div id="demo"></div>

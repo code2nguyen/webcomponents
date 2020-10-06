@@ -1,17 +1,26 @@
 ```js script
 import { html } from '@open-wc/demoing-storybook';
-import '../dist/dashboard-layout.js';
+import '../dist/index.js';
 
 export default {
   title: 'QuillEditor',
   component: 'quill-editor',
-  options: { selectedPanel: 'storybookjs/knobs/panel' },
 };
 ```
 
 # QuillEditor
 
 A text editor using quilljs library.
+
+### Installation
+
+```bash
+yarn add @cff/webcomponents
+```
+
+```js
+import '@cff/webcomponents/components/quill-editor/quill-editor.component.js';
+```
 
 ## Features:
 
