@@ -218,16 +218,25 @@ export class DashboardItem extends LitElement {
     this.cols = this.screenColumn[ScreenSize.Large];
   }
 
-  #currentBgColor = 0;
+  // use -1 to know this is initial value
+  #currentBgColor = -1;
   @property({ type: Number })
   get currentBgColor() {
-    return this.#currentBgColor;
+    return this.#currentBgColor === -1 ? 0 : this.#currentBgColor;
   }
   set currentBgColor(value: number) {
-    if (value !== this.#currentBgColor) {
+    if (value !== this.currentBgColor) {
+      const oldValue = this.#currentBgColor;
       this.classList.remove(`bg-${this.currentBgColor}`);
       this.#currentBgColor = value;
       this.classList.add(`bg-${this.currentBgColor}`);
+      if (oldValue !== -1) {
+        this.dispatchEvent(
+          new CustomEvent('change-background', {
+            detail: value,
+          })
+        );
+      }
     }
   }
 
@@ -522,7 +531,7 @@ export class DashboardItem extends LitElement {
 
   changeBackgroundColorIndex = () => {
     this.classList.remove(`bg-${this.currentBgColor}`);
-    this.currentBgColor = (this.#currentBgColor + 1) % this.#nbrBackgroundColor;
+    this.currentBgColor = (this.currentBgColor + 1) % this.#nbrBackgroundColor;
     this.classList.add(`bg-${this.currentBgColor}`);
   };
 

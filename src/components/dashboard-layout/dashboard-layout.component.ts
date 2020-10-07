@@ -240,6 +240,7 @@ export class DashboardLayout extends LitElement {
           item.rect = useColumnPack
             ? this.#gridCoordinator.columnPack(rect)
             : this.#gridCoordinator.pack(rect);
+          // item.rect = this.#gridCoordinator.pack(rect);
           return item;
         });
       }),

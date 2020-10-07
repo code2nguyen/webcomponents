@@ -163,8 +163,16 @@
           "default": 0
         }
       ],
-      "slots": [],
-      "events": []
+      "slots": [
+        {
+          "name": "toolbar"
+        }
+      ],
+      "events": [
+        {
+          "name": "change-background"
+        }
+      ]
     },
     {
       "name": "quill-editor",

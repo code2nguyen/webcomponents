@@ -74,7 +74,8 @@ export class QuillEditor extends LitElement {
     if (!window.Quill) {
       if (!window.QuillLoading) {
         window.QuillLoading = import('quill');
-        await window.QuillLoading;
+        const Quill = await window.QuillLoading;
+        window.Quill = window.Quill || Quill.default;
         setupQuill();
       } else {
         await window.QuillLoading;
