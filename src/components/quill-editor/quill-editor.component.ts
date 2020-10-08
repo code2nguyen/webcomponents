@@ -153,6 +153,7 @@ export class QuillEditor extends LitElement {
     });
 
     this.editor.on('editor-change', this.editorChangeHandler);
+    this.editor.focus();
   }
 
   editorChangeHandler = (
