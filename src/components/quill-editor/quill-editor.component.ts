@@ -53,6 +53,8 @@ export class QuillEditor extends LitElement {
 
   @property({ type: String }) format = 'html';
 
+  @property({ type: Boolean }) readonly = false;
+
   #content: any;
   @property({ type: Object, attribute: false })
   public get content(): any {
@@ -149,11 +151,15 @@ export class QuillEditor extends LitElement {
         toolbar: toolbarOptions,
         autoHyperLink: true,
       },
+      readOnly: this.readonly,
       placeholder: this.placeholder,
     });
 
     this.editor.on('editor-change', this.editorChangeHandler);
-    this.editor.focus();
+
+    if (!this.readonly) {
+      this.editor.focus();
+    }
   }
 
   editorChangeHandler = (

@@ -5,6 +5,7 @@ import {
   property,
   TemplateResult,
   customElement,
+  PropertyValues,
 } from 'lit-element';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -24,7 +25,14 @@ import {
 import { ScreenSize } from '../../shared/screen-size';
 import { DashboardItemRef } from './dashboard-item-ref';
 import { DashboardLayout } from '../dashboard-layout/dashboard-layout.component';
+import isEqual from 'lodash-es/isEqual';
 
+const EmptyRect = new Rect({
+  columnStart: 0,
+  rowStart: 0,
+  columnEnd: 0,
+  rowEnd: 0,
+});
 @customElement('cff-dashboard-item')
 export class DashboardItem extends LitElement {
   static styles = css`
@@ -82,6 +90,7 @@ export class DashboardItem extends LitElement {
       left: 0;
       right: 0;
       opacity: 0;
+      z-index: 1;
       transition: opacity 0.5s ease-in-out;
       align-self: stretch;
     }
@@ -178,51 +187,84 @@ export class DashboardItem extends LitElement {
     return this.#cols;
   }
   set cols(value: number) {
+    if (this.#cols === value) return;
+    const oldValue = this.#cols;
     this.#cols = value;
 
     if (value) {
       this.#screenColumn = initScreenColumns(this.#cols);
     }
-
-    this.requestUpdate();
+    this.requestUpdate('cols', oldValue);
   }
 
-  @property({ type: Number }) rows = 10;
-  @property({ type: Number }) order = -1;
+  #rows = 10;
+  @property({ type: Number })
+  public get rows() {
+    return this.#rows;
+  }
+  public set rows(value) {
+    if (value === this.#rows) return;
+    const oldValue = this.#rows;
+    this.#rows = value;
+    this.requestUpdate('rows', oldValue);
+  }
+
+  #order = -1;
+  @property({ type: Number })
+  public get order() {
+    return this.#order;
+  }
+  public set order(value) {
+    if (this.#order === value) return;
+    const oldValue = this.#order;
+    this.#order = value;
+    this.requestUpdate('order', oldValue);
+  }
 
   #screenColumn: ScreenColumns = initScreenColumns(this.#cols);
-  @property({ attribute: false })
+  @property({ type: Object })
   get screenColumn(): ScreenColumns {
     return this.#screenColumn;
   }
   set screenColumn(value: ScreenColumns) {
+    if (isEqual(value, this.#screenColumn)) return;
+    const oldValue = { ...this.#screenColumn };
     if (!value && this.#cols) {
       this.#screenColumn = initScreenColumns(this.#cols);
     } else {
       this.#screenColumn = value;
     }
-    this.requestUpdate();
+    this.requestUpdate('screenColumn', oldValue);
   }
 
   getCols(screenSize: ScreenSize): number {
     return this.#screenColumn![screenSize];
   }
 
+  // Seeamless update from parent
+
+  updateRows(value: number) {
+    this.#rows = value;
+  }
+
+  updateOrder(value: number) {
+    this.#order = value;
+  }
+
   updateScreenColumns(columnOffset: number, screenSize: ScreenSize) {
     if (columnOffset == 0) return;
-    this.screenColumn = updateScreenColumns(
+    this.#screenColumn = updateScreenColumns(
       columnOffset,
       screenSize,
       this.screenColumn!
     );
-    this.cols = this.screenColumn[ScreenSize.Large];
+    this.#cols = this.screenColumn[ScreenSize.Large];
   }
 
-  // use -1 to know this is initial value
-  #currentBgColor = -1;
+  #currentBgColor = 0;
   @property({ type: Number })
   get currentBgColor() {
-    return this.#currentBgColor === -1 ? 0 : this.#currentBgColor;
+    return this.#currentBgColor;
   }
   set currentBgColor(value: number) {
     if (value !== this.currentBgColor) {
@@ -230,30 +272,21 @@ export class DashboardItem extends LitElement {
       this.classList.remove(`bg-${this.currentBgColor}`);
       this.#currentBgColor = value;
       this.classList.add(`bg-${this.currentBgColor}`);
-      if (oldValue !== -1) {
-        this.dispatchEvent(
-          new CustomEvent('change-background', {
-            detail: value,
-          })
-        );
-      }
+      this.requestUpdate('currentBgColor', oldValue);
     }
   }
 
-  rect: Rect = new Rect({
-    columnStart: 0,
-    rowStart: 0,
-    columnEnd: 0,
-    rowEnd: 0,
-  });
+  rect: Rect = EmptyRect;
   stamp = false;
   #editable = false;
   public get editable() {
     return this.#editable;
   }
   public set editable(value) {
+    if (value === this.#editable) return;
+    const oldValue = this.#editable;
     this.#editable = value;
-    this.requestUpdate();
+    this.requestUpdate('editable', oldValue);
   }
   changedSize = new Subject<PosistionOffset>();
 
@@ -274,9 +307,14 @@ export class DashboardItem extends LitElement {
   };
 
   #nbrBackgroundColor = 13;
+
+  #layoutService?: LayoutService;
   get layoutService(): LayoutService | undefined {
-    const parent = this.parentElement as DashboardLayout;
-    return parent?.layoutService;
+    if (!this.#layoutService) {
+      const parent = this.parentElement as DashboardLayout;
+      this.#layoutService = parent?.layoutService;
+    }
+    return this.#layoutService;
   }
 
   get itemRef() {
@@ -301,26 +339,6 @@ export class DashboardItem extends LitElement {
           <!-- external toolbar slot -->
           <slot name="toolbar"></slot>
           <div class="dashboard-item-toolbar-separator"></div>
-
-          <!-- delete -->
-          <!-- <div class="dashboard-item-toolbar-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-archive"
-              >
-                <polyline points="21 8 21 21 3 21 3 8"></polyline>
-                <rect x="1" y="3" width="22" height="5"></rect>
-                <line x1="10" y1="12" x2="14" y2="12"></line>
-              </svg>
-            </div> -->
 
           ${this.editable
             ? html`
@@ -374,7 +392,28 @@ export class DashboardItem extends LitElement {
     `;
   }
 
+  updated(changedProperties: PropertyValues) {
+    if (
+      changedProperties.has('cols') ||
+      changedProperties.has('screenColumn') ||
+      changedProperties.has('order') ||
+      changedProperties.has('rows')
+    ) {
+      if (
+        changedProperties.has('cols') ||
+        changedProperties.has('screenColumn') ||
+        changedProperties.has('order')
+      ) {
+        this.rect = EmptyRect;
+      }
+
+      console.log('relayout me', changedProperties);
+      this.layoutService?.layoutItem(this);
+    }
+  }
+
   _initEditMode() {
+    if (this.editable) return;
     this.editable = true;
     this.#itemRef = new DashboardItemRef(this);
     this.#itemRef.pointerDown
@@ -397,6 +436,7 @@ export class DashboardItem extends LitElement {
   }
 
   _removeEditMode() {
+    if (!this.editable) return;
     this.editable = false;
     this.#stopMouseListener$.next();
     this.#stopMouseListener$.complete();
@@ -533,6 +573,11 @@ export class DashboardItem extends LitElement {
     this.classList.remove(`bg-${this.currentBgColor}`);
     this.currentBgColor = (this.currentBgColor + 1) % this.#nbrBackgroundColor;
     this.classList.add(`bg-${this.currentBgColor}`);
+    this.dispatchEvent(
+      new CustomEvent('change-background', {
+        detail: this.currentBgColor,
+      })
+    );
   };
 
   getTargetHandle(mouseEventTargets: EventTarget[]): HTMLElement | null {

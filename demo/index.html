@@ -179,8 +179,18 @@
           document.querySelector('body')
         );
       }
-      renderDashboard();
+
+      function renderDeleteConfirmationButton() {
+        render(
+          html`<cff-delete-confirmation
+            style="position: absolute; top: 300px; left: 300px"
+          ></cff-delete-confirmation>`,
+          document.querySelector('body')
+        );
+      }
+      // renderDashboard();
       // calendarClock();
+      renderDeleteConfirmationButton();
     </script>
 
     <div id="demo"></div>

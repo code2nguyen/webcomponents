@@ -74,6 +74,14 @@ export class LayoutService {
     this.#itemsSubject.next(this.__getOrderedItems());
   }
 
+  layoutItem(item: DashboardItem) {
+    if (!this.#items.has(item)) {
+      this.registerItem(item);
+    } else {
+      this.#itemsSubject.next(this.__getOrderedItems());
+    }
+  }
+
   __getOrderedItems() {
     return Array.from(this.#items)
       .map((item, index) => {

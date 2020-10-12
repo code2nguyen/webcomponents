@@ -185,6 +185,12 @@
           "type": "String",
           "description": "",
           "default": "html"
+        },
+        {
+          "name": "readonly",
+          "type": "Boolean",
+          "description": "",
+          "default": "false"
         }
       ],
       "slots": [],

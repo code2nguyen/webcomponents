@@ -112,7 +112,7 @@ export class SearchInput extends LitElement {
     this.#termSubscription.unsubscribe();
   }
 
-  _setDesctive() {
+  _setDesctive(event: Event) {
     this.classList.remove('active');
   }
 

@@ -4,3 +4,4 @@ export { QuillEditor } from './components/quill-editor/quill-editor.component';
 export { QuillEditorToolbar } from './components/quill-editor-toolbar/quill-editor-toolbar.component';
 export { CalendarClock } from './components/calendar-clock/calendar-clock.component';
 export { SearchInput } from './components/search-input/search-input.component';
+export { DeleteConfirmation } from './components/delete-confirmation/delete-confirmation.component';

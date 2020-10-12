@@ -209,6 +209,7 @@ export class DashboardLayout extends LitElement {
             .sort((itemA, itemB) => itemA.order! - itemB.order!)
         ),
         tap(items => {
+          console.log('recalculate');
           items.forEach(item => {
             if (this.editable) {
               if (!item.editable) {
@@ -392,8 +393,9 @@ export class DashboardLayout extends LitElement {
               columnOffset,
               this.#currentScreenSize
             );
-            dashboardItem.rows =
-              resizingPosition.rowEnd - resizingPosition.rowStart;
+            dashboardItem.updateRows(
+              resizingPosition.rowEnd - resizingPosition.rowStart
+            );
             this._dispatchChangeEvent();
             break;
           }
@@ -561,7 +563,7 @@ export class DashboardLayout extends LitElement {
     });
 
     this.#dashboardItems.forEach((item, index) => {
-      item.order = index;
+      item.updateOrder(index);
     });
   }
 
