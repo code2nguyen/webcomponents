@@ -1,4 +1,11 @@
-import { css, html, LitElement, customElement, query } from 'lit-element';
+import {
+  css,
+  html,
+  LitElement,
+  customElement,
+  query,
+  property,
+} from 'lit-element';
 
 @customElement('cff-calendar-clock')
 export class CalendarClock extends LitElement {
@@ -14,7 +21,7 @@ export class CalendarClock extends LitElement {
       justify-content: center;
       flex-direction: column;
       align-items: center;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: inherit;
       background-color: var(--calender-clock-bg, #303236);
     }
 
@@ -39,15 +46,13 @@ export class CalendarClock extends LitElement {
 
     .welcome-text {
       color: var(--calender-clock-welcome-text, #ffffff);
-      font-size: 48px;
-      margin-bottom: 64px;
+      font-size: 1.2rem;
+      margin-bottom: 90px;
       animation: text 1s forwards;
     }
     .calendar-clock-container {
       position: relative;
-      width: 100%;
-      height: 200px;
-      /* margin: auto; */
+      top: -60px;
     }
     .bloc {
       width: 120px;
@@ -67,17 +72,17 @@ export class CalendarClock extends LitElement {
     }
 
     .bloc-1 {
-      background-color: #3498db;
+      background-color: var(--calendar-clock-card-1, #3498db);
       animation: moveLeft 0.5s forwards;
       /* transform: rotate(5deg) translateX(-100px) scale(1); */
     }
     .bloc-2 {
-      background-color: #ff726b;
+      background-color: var(--calendar-clock-card-2, #ff726b);
       z-index: 1;
       /* animation: center 0.2s forwards; */
     }
     .bloc-3 {
-      background-color: #efc94c;
+      background-color: var(--calendar-clock-card-3, #efc94c);
       animation: moveRight 0.5s forwards;
     }
     .bloc-time,
@@ -90,15 +95,15 @@ export class CalendarClock extends LitElement {
       font-size: 16px;
     }
     .bloc-1 .bloc-text {
-      color: #3498db;
+      color: var(--calendar-clock-card-1, #3498db);
     }
 
     .bloc-2 .bloc-text {
-      color: #ff726b;
+      color: var(--calendar-clock-card-2, #ff726b);
     }
 
     .bloc-3 .bloc-text {
-      color: #efc94c;
+      color: var(--calendar-clock-card-3, #efc94c);
     }
     @keyframes text {
       0% {
@@ -180,6 +185,8 @@ export class CalendarClock extends LitElement {
 
   @query('.bloc-2') bloc2!: HTMLDivElement;
 
+  @property({ type: String }) todayMessage = '';
+
   #timeLeft = '';
   #timeCenter = '';
   #timeRight = '';
@@ -253,7 +260,7 @@ export class CalendarClock extends LitElement {
 
   render() {
     return html`
-      <!-- <div class="welcome-text">Hello, have a good day !</div> -->
+      <div class="welcome-text">${this.todayMessage}</div>
       <div class="calendar-clock-container">
         <div class="bloc bloc-1">
           <span class="bloc-time">${this.#timeLeft}</span>

@@ -3,7 +3,7 @@ import { html } from '@open-wc/demoing-storybook';
 import '../dist/index.js';
 
 export default {
-  title: 'DashboardLayout',
+  title: 'dashboard-layout',
   component: 'dashboard-layout',
 };
 ```
@@ -64,7 +64,11 @@ export const Demo = () => html`
       width: 100%;
     }
   </style>
-  <cff-dashboard-layout editable="true" scrollableParentSelector="viewport">
+  <cff-dashboard-layout
+    style="width: 800px;height: 300px}"
+    editable="true"
+    scrollableParentSelector="viewport"
+  >
     <cff-dashboard-item currentBgColor=${Math.floor(Math.random() * 13)}>
       <cff-quill-editor></cff-quill-editor>
       <cff-quill-editor-toolbar slot="toolbar"></cff-quill-editor-toolbar>

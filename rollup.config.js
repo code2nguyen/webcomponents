@@ -16,10 +16,10 @@ const commonPlugins = [
 ];
 
 const es6Bundle = {
-  input: ['src/components/calendar-clock/index.ts'],
+  input: ['src/index.ts'],
   output: {
     dir: 'dist',
-    entryFileNames: 'bundle/calendar-clock.js',
+    entryFileNames: 'bundle/webcomponents.js',
     format: 'cjs',
     name: 'calendar-clock',
     sourcemap: true,

@@ -3,7 +3,7 @@ import { html } from '@open-wc/demoing-storybook';
 import '../dist/index.js';
 
 export default {
-  title: 'SearchInput',
+  title: 'search-input',
   component: 'search-input',
 };
 ```
@@ -31,6 +31,13 @@ import '@cff/webcomponents/components/search-input/search-input.component.js';
 ```js preview-story
 export const Demo = () =>
   html` <cff-search-input style="width: 450px;"> </cff-search-input> `;
+```
+
+```js preview-story
+export const Loading = () =>
+  html`
+    <cff-search-input style="width: 450px;" loading="true"> </cff-search-input>
+  `;
 ```
 
 ## API

@@ -1,20 +1,20 @@
-# \<dashboard-layout>
+# @cff/webcomponents
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-[Documentation](https://code2nguyen.github.io/dashboard-layout/index.html)
+[Documentation](https://code2nguyen.github.io/webcomponents/index.html)
 
 ## Installation
 
 ```bash
-npm i @cff/dashboard-layout
+npm i @cff/webcomponents
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import '@cff/dashboard-layout/dashboard-layout.js';
+  import '@cff/webcomponents/dashboard-layout/dashboard-layout.js';
 </script>
 
 <cff-dashboard-layout></cff-dashboard-layout>

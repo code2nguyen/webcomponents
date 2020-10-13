@@ -3,7 +3,7 @@ import { html } from '@open-wc/demoing-storybook';
 import '../dist/index.js';
 
 export default {
-  title: 'QuillEditor',
+  title: 'quill-editor',
   component: 'quill-editor',
 };
 ```

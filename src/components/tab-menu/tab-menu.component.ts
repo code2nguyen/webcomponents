@@ -26,7 +26,7 @@ export class TabMenu extends LitElement {
     .menu-item {
       padding: 0px 8px;
       line-height: 32px;
-      font-family: 'RedHadDisplay';
+      font-family: inherit;
       font-weight: 300;
       position: relative;
       user-select: none;

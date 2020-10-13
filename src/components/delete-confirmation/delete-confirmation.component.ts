@@ -135,7 +135,7 @@ export class DeleteConfirmation extends LitElement {
     }
 
     .confirmation-panel .action-button.ok {
-      background-color: #3498db;
+      background-color: var(--confirm-button-bg, #3498db);
     }
   `;
 

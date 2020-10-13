@@ -42,8 +42,11 @@
     "lit-element",
     "typescript"
   ],
-  "author": "dashboard-layout",
+  "author": "code2nguyen",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com"
+  },
   "dependencies": {
     "@material/mwc-circular-progress-four-color": "^0.19.1",
     "highlight.js": "^10.2.0",

@@ -34,6 +34,12 @@
           "type": "Number",
           "description": "",
           "default": "0"
+        },
+        {
+          "name": "disableFirstRenderAnimation",
+          "type": "Boolean",
+          "description": "",
+          "default": "true"
         }
       ],
       "events": [
@@ -55,7 +61,35 @@
           "description": "",
           "type": "RBG Color",
           "default": "255, 255, 255"
-        },
+        }
+      ]
+    },
+    {
+      "name": "dashboard-item",
+      "description": "A placeholder of widget used by dashboard-layout",
+      "properties": [
+        { "name": "cols", "type": "Number", "description": "", "default": 3 },
+        { "name": "row", "type": "Number", "description": "", "default": 10 },
+        { "name": "order", "type": "Number", "description": "", "default": -1 },
+        { "name": "screenColumn", "type": "ScreenColumns", "description": "" },
+        {
+          "name": "currentBgColor",
+          "type": "number",
+          "description": "",
+          "default": 0
+        }
+      ],
+      "slots": [
+        {
+          "name": "toolbar"
+        }
+      ],
+      "events": [
+        {
+          "name": "change-background"
+        }
+      ],
+      "cssProperties": [
         {
           "name": "--dashboard-theme-item-border-color",
           "description": "",
@@ -149,24 +183,6 @@
       ]
     },
     {
-      "name": "dashboard-item",
-      "description": "A placeholder of widget used by dashboard-layout",
-      "properties": [
-        { "name": "cols", "type": "Number", "description": "", "default": 3 },
-        { "name": "row", "type": "Number", "description": "", "default": 10 },
-        { "name": "order", "type": "Number", "description": "", "default": -1 },
-        { "name": "screenColumn", "type": "ScreenColumns", "description": "" },
-        {
-          "name": "currentBgColor",
-          "type": "number",
-          "description": "",
-          "default": 0
-        }
-      ],
-      "slots": [],
-      "events": []
-    },
-    {
       "name": "quill-editor",
       "description": "A text editor using quilljs library.",
       "properties": [
@@ -177,6 +193,12 @@
           "type": "String",
           "description": "",
           "default": "html"
+        },
+        {
+          "name": "readonly",
+          "type": "Boolean",
+          "description": "",
+          "default": "false"
         }
       ],
       "slots": [],
@@ -228,6 +250,152 @@
           "description": "",
           "type": "Font-Family",
           "default": "RedHatDisplay"
+        }
+      ]
+    },
+    {
+      "name": "search-input",
+      "description": "A simple search input text",
+      "properties": [
+        {
+          "name": "placeholder",
+          "type": "String",
+          "description": "",
+          "default": "Search..."
+        },
+        {
+          "name": "value",
+          "type": "String",
+          "description": ""
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "description": "",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "change"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--search-input-text-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 255, 255"
+        },
+        {
+          "name": "--search-input-text-border-color",
+          "description": "",
+          "type": "Color",
+          "default": "transparent"
+        },
+        {
+          "name": "--search-input-bg-color",
+          "description": "",
+          "type": "Color",
+          "default": "#494c52"
+        },
+        {
+          "name": "--search-input-bg--active-color",
+          "description": "",
+          "type": "Color",
+          "default": "#595c63"
+        },
+        {
+          "name": "--search-input-text-font-size",
+          "description": "",
+          "type": "Font Size",
+          "default": "16px"
+        }
+      ]
+    },
+    {
+      "name": "calendar-clock",
+      "description": "Display Date/time in card format",
+      "properties": [
+        {
+          "name": "todayMessage",
+          "type": "String",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "closed"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--calender-clock-bg",
+          "description": "",
+          "type": "Color",
+          "default": "#303236"
+        },
+        {
+          "name": "--calender-clock-welcome-text",
+          "description": "",
+          "type": "Color",
+          "default": "#ffffff"
+        },
+        {
+          "name": "--calendar-clock-card-1",
+          "description": "",
+          "type": "Color",
+          "default": "#3498db"
+        },
+        {
+          "name": "--calendar-clock-card-2",
+          "description": "",
+          "type": "Color",
+          "default": "#ff726b"
+        },
+        {
+          "name": "--calendar-clock-card-3",
+          "description": "",
+          "type": "Color",
+          "default": "#efc94c"
+        }
+      ]
+    },
+    {
+      "name": "tab-menu",
+      "description": "",
+      "properties": [
+        {
+          "name": "items",
+          "type": "String[]",
+          "description": "",
+          "default": "[]"
+        },
+        {
+          "name": "selectedItem",
+          "type": "String",
+          "description": "",
+          "default": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "tab-change"
+        }
+      ],
+      "cssProperties": [
+        {
+          "name": "--tab-menu-text-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 255, 255"
+        },
+        {
+          "name": "--active-border-color",
+          "description": "",
+          "type": "RGB Color",
+          "default": "255, 114, 107"
         }
       ]
     }
