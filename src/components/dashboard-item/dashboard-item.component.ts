@@ -136,7 +136,7 @@ export class DashboardItem extends LitElement {
       border-color: transparent;
     }
     :host(.bg-2) {
-      background-color: var(--dashboard-theme-item-bg-color-2, #5c2b29);
+      background-color: var(--dashboard-theme-item-bg-color-2, #733634);
       border-color: transparent;
     }
     :host(.bg-3) {
@@ -164,7 +164,7 @@ export class DashboardItem extends LitElement {
       border-color: transparent;
     }
     :host(.bg-9) {
-      background-color: var(--dashboard-theme-item-bg-color-9, #42275e);
+      background-color: var(--dashboard-theme-item-bg-color-9, #582f61);
       border-color: transparent;
     }
     :host(.bg-10) {
@@ -172,7 +172,7 @@ export class DashboardItem extends LitElement {
       border-color: transparent;
     }
     :host(.bg-11) {
-      background-color: var(--dashboard-theme-item-bg-color-11, #442f19);
+      background-color: var(--dashboard-theme-item-bg-color-11, #5c4022);
       border-color: transparent;
     }
     :host(.bg-12) {

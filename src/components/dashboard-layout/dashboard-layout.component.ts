@@ -126,6 +126,15 @@ export class DashboardLayout extends LitElement {
   @property({ type: Number }) paddingTop = 0;
   @property({ type: Number }) paddingBottom = 0;
 
+  #disableFirstRenderAnimation = true;
+  @property({ type: Boolean })
+  public get disableFirstRenderAnimation() {
+    return this.#disableFirstRenderAnimation;
+  }
+  public set disableFirstRenderAnimation(value) {
+    this.#disableFirstRenderAnimation = value;
+  }
+
   @query('.dashboard-layout__placeholder') placeHolder!: HTMLElement;
 
   layoutService: LayoutService;
@@ -162,7 +171,6 @@ export class DashboardLayout extends LitElement {
   #mediaQueries: MediaQueryList[] = [];
   #currentScreenSize: ScreenSize = ScreenSize.Large;
   #cols$ = new BehaviorSubject<number>(0);
-  #firstLayout = true;
 
   get cols(): number {
     return this.#cols$.value;
@@ -292,8 +300,8 @@ export class DashboardLayout extends LitElement {
       });
 
     this.#orderedItems$.pipe(takeUntil(this.#destroyed$)).subscribe(items => {
-      this._layoutItems(this.#firstLayout);
-      this.#firstLayout = false;
+      this._layoutItems(this.#disableFirstRenderAnimation);
+      this.#disableFirstRenderAnimation = false;
     });
     (this.#orderedItems$ as ConnectableObservable<DashboardItem[]>).connect();
   }

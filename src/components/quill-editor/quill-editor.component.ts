@@ -157,9 +157,17 @@ export class QuillEditor extends LitElement {
 
     this.editor.on('editor-change', this.editorChangeHandler);
 
-    if (!this.readonly) {
+    if (!this.readonly && this.#focus) {
       this.editor.focus();
     }
+  }
+
+  #focus = false;
+  focus() {
+    if (!this.readonly && this.editor) {
+      this.editor.focus();
+    }
+    this.#focus = true;
   }
 
   editorChangeHandler = (
