@@ -27,7 +27,7 @@ export class TabMenu extends LitElement {
       padding: 0px 8px;
       line-height: 32px;
       font-family: inherit;
-      font-weight: 300;
+      font-weight: inherit;
       position: relative;
       user-select: none;
       text-align: center;

@@ -77,7 +77,7 @@ export class DashboardItem extends LitElement {
       display: flex;
       flex: 1;
       overflow: hidden;
-      margin-bottom: 32px;
+      margin: 0px 8px 32px 0px;
     }
 
     .dashboard-item-toolbar {
