@@ -1,23 +1,11 @@
-# @cff/webcomponents
-
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+# @c2n/webcomponents
 
 [Documentation](https://code2nguyen.github.io/webcomponents/index.html)
 
 ## Installation
 
 ```bash
-npm i @cff/webcomponents
-```
-
-## Usage
-
-```html
-<script type="module">
-  import '@cff/webcomponents/dashboard-layout/dashboard-layout.js';
-</script>
-
-<cff-dashboard-layout></cff-dashboard-layout>
+npm i @c2n/webcomponents
 ```
 
 ## Linting with ESLint, Prettier, and Types
