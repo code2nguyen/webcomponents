@@ -1,5 +1,5 @@
 {
-  "name": "@cff/webcomponents",
+  "name": "@c2n/webcomponents",
   "version": "1.0.0",
   "description": "Webcomponent following open-wc recommendations",
   "main": "index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "build:bundle": "npm run build && npm run rollup && cp package.json dist",
+    "build:bundle": "npm run build && npm run rollup && cp package.json dist && cp README.md dist && cp custom-elements.json dist",
     "rollup": "rollup -c",
     "clean": "rimraf my-element.{d.ts,d.ts.map,js,js.map} test/my-element.{d.ts,d.ts.map,js,js.map} test/my-element_test.{d.ts,d.ts.map,js,js.map}",
     "lint": "npm run lint:eslint && npm run lint:prettier",
@@ -46,6 +46,11 @@
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.com"
+  },
+  "homepage": "https://github.com/code2nguyen/webcomponents.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code2nguyen/webcomponents.git"
   },
   "dependencies": {
     "@material/mwc-circular-progress-four-color": "^0.19.1",
