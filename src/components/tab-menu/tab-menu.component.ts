@@ -92,13 +92,15 @@ export class TabMenu extends LitElement {
     if (newSelectedItem) {
       this.activeItem.active = { active: true };
       this.sliderStyle.left = `${newSelectedItem.offsetLeft}px`;
-      this.sliderStyle.width = `${newSelectedItem.offsetWidth}px`;
+      this.sliderStyle.width = `${newSelectedItem.clientWidth}px`;
       this.requestUpdate();
     }
   }
 
   firstUpdated() {
-    this.updateSliderPosition(this.items.indexOf(this.#selectedItem));
+    setTimeout(() => {
+      this.updateSliderPosition(this.items.indexOf(this.#selectedItem));
+    }, 100);
   }
 
   onItemClick(item: string) {

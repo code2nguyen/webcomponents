@@ -48,6 +48,7 @@ export class SearchInput extends LitElement {
     .text-input {
       padding: 16px 32px 16px 44px;
       flex: 1;
+      width: 100%;
       background: transparent;
       border: none;
       outline: none;

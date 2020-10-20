@@ -6,6 +6,7 @@ import {
   query,
   property,
 } from 'lit-element';
+import { uniqueId } from 'lodash-es';
 
 @customElement('cff-calendar-clock')
 export class CalendarClock extends LitElement {
@@ -202,7 +203,7 @@ export class CalendarClock extends LitElement {
         month: 'long',
         day: 'numeric',
       })
-      .split(/\/|\s|:|,|-|\./);
+      .split(/\/|\s|:|,\s|-|\.\s/);
     // .map(item => item.trim());
   }
 

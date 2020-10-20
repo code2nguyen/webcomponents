@@ -459,9 +459,10 @@ export class DashboardLayout extends LitElement {
     return {
       columnStart:
         oldPosition.columnStart +
-        this._getSpan(offset.left, this.#gridColumnWidth),
+        this._getSpanFloor(offset.left, this.#gridColumnWidth),
       rowStart:
-        oldPosition.rowStart + this._getSpan(offset.top, this.#gridRowHeight),
+        oldPosition.rowStart +
+        this._getSpanFloor(offset.top, this.#gridRowHeight),
       columnEnd: Math.min(
         oldPosition.columnEnd +
           this._getSpan(offset.width, this.#gridColumnWidth),
@@ -473,6 +474,10 @@ export class DashboardLayout extends LitElement {
   }
 
   private _getSpan(size: number, baseSize: number) {
+    return Math.ceil((size + this.gutterSize) / (baseSize + this.gutterSize));
+  }
+
+  private _getSpanFloor(size: number, baseSize: number) {
     return Math.floor((size + this.gutterSize) / (baseSize + this.gutterSize));
   }
 

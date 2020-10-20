@@ -6,3 +6,5 @@ export { CalendarClock } from './components/calendar-clock/calendar-clock.compon
 export { SearchInput } from './components/search-input/search-input.component';
 export { DeleteConfirmation } from './components/delete-confirmation/delete-confirmation.component';
 export { TabMenu } from './components/tab-menu/tab-menu.component';
+export { MonacoEditor } from './components/monaco-editor/monaco-editor.component';
+export { MonacoEditorToolbar } from './components/monaco-editor-toolbar/monaco-editor-toolbar.component';

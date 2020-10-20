@@ -6,6 +6,7 @@ import {
   TemplateResult,
   customElement,
   PropertyValues,
+  query,
 } from 'lit-element';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,6 +42,7 @@ export class DashboardItem extends LitElement {
       position: absolute;
       overflow: hidden;
       border-radius: 4px;
+      z-index: 0;
       border: 1px solid
         rgba(var(--dashboard-theme-item-border-color, 255, 255, 255), 0.3);
       background-color: var(--dashboard-theme-item-bg-color-0, #303236);
@@ -77,7 +79,7 @@ export class DashboardItem extends LitElement {
       display: flex;
       flex: 1;
       overflow: hidden;
-      margin: 0px 8px 32px 0px;
+      margin: var(--dashboard-item-content-margin, 0px 0px 32px 0px);
     }
 
     .dashboard-item-toolbar {
@@ -95,9 +97,9 @@ export class DashboardItem extends LitElement {
       align-self: stretch;
     }
 
-    .dashboard-item-content:hover .dashboard-item-toolbar {
+    /* .dashboard-item-content:hover .dashboard-item-toolbar {
       opacity: 1;
-    }
+    } */
     .dashboard-item-toolbar .dashboard-item-toolbar-icon {
       color: rgba(var(--dashboard-theme-item-icon-color, 255, 255, 255), 0.5);
       padding: 0px 8px;
@@ -276,6 +278,8 @@ export class DashboardItem extends LitElement {
     }
   }
 
+  @query('.dashboard-item-toolbar') toolbar!: HTMLElement;
+
   rect: Rect = EmptyRect;
   stamp = false;
   #editable = false;
@@ -330,6 +334,13 @@ export class DashboardItem extends LitElement {
     this.layoutService?.removeItem(this);
     this._removeEditMode();
     super.disconnectedCallback();
+  }
+
+  async firstUpdated() {
+    // Give the browser a chance to paint
+    await new Promise(r => setTimeout(r, 0));
+    this.addEventListener('mouseenter', this._handleMouseEnter);
+    this.addEventListener('mouseleave', this._handleMouseLeave);
   }
 
   render(): TemplateResult {
@@ -411,6 +422,16 @@ export class DashboardItem extends LitElement {
       this.layoutService?.layoutItem(this);
     }
   }
+
+  _handleMouseEnter = () => {
+    this.toolbar.style.opacity = '1';
+    this.style.zIndex = '1';
+  };
+  _handleMouseLeave = () => {
+    this.dispatchEvent(new CustomEvent('hideToolbar'));
+    this.toolbar.style.opacity = '0';
+    this.style.zIndex = '';
+  };
 
   _initEditMode() {
     if (this.editable) return;

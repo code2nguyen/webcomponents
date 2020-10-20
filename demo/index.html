@@ -87,6 +87,23 @@
         font-weight: 700;
         text-rendering: optimizeLegibility;
       }
+      ::-webkit-scrollbar {
+        height: 8px;
+        overflow: auto;
+        width: 8px;
+      }
+      ::-webkit-scrollbar-corner {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(245, 245, 245, 0.2);
+        border-radius: 20px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(245, 245, 245, 0.4);
+      }
     </style>
     <style>
       body {
@@ -119,6 +136,12 @@
       function renderDashboard() {
         render(
           html`
+            <style>
+              .monaco-editor-item {
+                --dashboard-item-content-margin: 8px 0 32px 0;
+                --dashboard-theme-item-bg-color-0: #282c34 !important;
+              }
+            </style>
             <div style="width: 500px; height: 48px; margin: 32px">
               <cff-search-input loading="true"></cff-search-input>
             </div>
@@ -138,11 +161,14 @@
                   slot="toolbar"
                 ></cff-quill-editor-toolbar>
               </cff-dashboard-item>
-              <cff-dashboard-item>
-                <cff-quill-editor></cff-quill-editor>
-                <cff-quill-editor-toolbar
+              <cff-dashboard-item class="monaco-editor-item">
+                <cff-monaco-editor
+                  style="margin-right"
+                  libPath="../node_modules/monaco-editor/min/vs"
+                ></cff-monaco-editor>
+                <cff-monaco-editor-toolbar
                   slot="toolbar"
-                ></cff-quill-editor-toolbar>
+                ></cff-monaco-editor-toolbar>
               </cff-dashboard-item>
               <cff-dashboard-item>
                 <cff-quill-editor></cff-quill-editor>
@@ -200,10 +226,21 @@
           document.querySelector('body')
         );
       }
+
+      function renderMonacoEditor() {
+        render(
+          html`<cff-monaco-editor
+            libPath="../node_modules/monaco-editor/min/vs"
+            style="width: 300px; height: 500px"
+          ></cff-monaco-editor>`,
+          document.querySelector('body')
+        );
+      }
       renderDashboard();
       // calendarClock();
       // renderDeleteConfirmationButton();
       // renderTabMenu();
+      // renderMonacoEditor();
     </script>
 
     <div id="demo"></div>
