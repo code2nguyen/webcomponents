@@ -22,7 +22,7 @@ export class CalendarClock extends LitElement {
       justify-content: center;
       flex-direction: column;
       align-items: center;
-      font-family: inherit;
+      font-family: var(--calendar-clock-font, 'RedHatDisplay');
       background-color: var(--calender-clock-bg, #303236);
     }
 
