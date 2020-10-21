@@ -398,6 +398,39 @@
           "default": "255, 114, 107"
         }
       ]
+    },
+    {
+      "name": "monaco-editor",
+      "description": "",
+      "properties": [
+        {
+          "name": "libPath",
+          "type": "String",
+          "description": "monaco lib location",
+          "default": "node_modules/monaco-editor/min/vs"
+        },
+        {
+          "name": "value",
+          "type": "String",
+          "description": "",
+          "default": ""
+        },
+        {
+          "name": "language",
+          "type": "String",
+          "description": "",
+          "default": "markdown"
+        }
+      ],
+      "events": [
+        {
+          "name": "value-changed"
+        },
+        {
+          "name": "language-changed"
+        }
+      ],
+      "cssProperties": []
     }
   ]
 }
