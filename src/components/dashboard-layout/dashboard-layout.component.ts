@@ -473,7 +473,9 @@ export class DashboardLayout extends LitElement {
   }
 
   private _getSpan(size: number, baseSize: number) {
-    return Math.ceil((size + this.gutterSize) / (baseSize + this.gutterSize));
+    return Math.floor(
+      (size + this.gutterSize + baseSize / 2) / (baseSize + this.gutterSize)
+    );
   }
 
   private _getSpanFloor(size: number, baseSize: number) {
