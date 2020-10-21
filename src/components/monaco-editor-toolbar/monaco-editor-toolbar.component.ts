@@ -115,13 +115,23 @@ export class MonacoEditorToolbar extends LitElement {
     return html`
       <!-- color -->
       <div class="dashboard-item-toolbar">
-
-      <span id="language-text" class="first-capitalize"  @click=${
-        this.openSelectLanguageMenu
-      }>${this.language}</span>
-        <mwc-menu activatable @selected=${
-          this.changeLanguage
-        } class="menu" id="language-menu" fixed menuCorner="START" corner="BOTTOM_START" y="-30" x="0">
+        <span
+          id="language-text"
+          class="first-capitalize"
+          @click=${this.openSelectLanguageMenu}
+          >${this.language}</span
+        >
+        <mwc-menu
+          activatable
+          @selected=${this.changeLanguage}
+          class="menu"
+          id="language-menu"
+          fixed
+          menuCorner="START"
+          corner="BOTTOM_START"
+          y="-30"
+          x="0"
+        >
           ${this.#languages.map(
             lang =>
               html`<mwc-list-item
@@ -137,9 +147,11 @@ export class MonacoEditorToolbar extends LitElement {
 
       <div class="dashboard-item-toolbar-separator"></div>
       <!-- code -->
-      <div class="dashboard-item-toolbar" data-action="code-block" @click=${
-        this.formatDocument
-      }">
+      <div
+        class="dashboard-item-toolbar"
+        data-action="code-block"
+        @click=${this.formatDocument}
+      >
         Format
       </div>
     `;

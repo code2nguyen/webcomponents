@@ -87,7 +87,7 @@ export class QuillEditorToolbar extends LitElement {
   render() {
     return html`
       <!-- color -->
-      <div class="dashboard-item-toolbar-icon" @click=${this.changeBackgroundColorIndex}">
+      <div class="dashboard-item-toolbar-icon" @click=${this.changeBackgroundColorIndex}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 12 12"
@@ -147,7 +147,7 @@ export class QuillEditorToolbar extends LitElement {
       <div class="dashboard-item-toolbar-separator"></div>
 
       <!-- code -->
-      <div class="dashboard-item-toolbar-icon" data-action="code-block" @click=${this.handleToolbarAction}">
+      <div class="dashboard-item-toolbar-icon" data-action="code-block" @click=${this.handleToolbarAction}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -166,7 +166,7 @@ export class QuillEditorToolbar extends LitElement {
       </div>
 
       <!-- check list -->
-      <div class="dashboard-item-toolbar-icon" data-action="check" @click=${this.handleToolbarAction}">
+      <div class="dashboard-item-toolbar-icon" data-action="check" @click=${this.handleToolbarAction}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 13.67 13"
