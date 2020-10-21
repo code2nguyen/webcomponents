@@ -35,8 +35,8 @@ export class TabMenu extends LitElement {
     }
 
     .menu-item-seperator {
-      min-width: 8px;
-      max-width: 32px;
+      min-width: 4px;
+      max-width: 12px;
       flex: 1;
     }
 
