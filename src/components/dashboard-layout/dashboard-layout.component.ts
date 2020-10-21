@@ -217,7 +217,6 @@ export class DashboardLayout extends LitElement {
             .sort((itemA, itemB) => itemA.order! - itemB.order!)
         ),
         tap(items => {
-          console.log('recalculate');
           items.forEach(item => {
             if (this.editable) {
               if (!item.editable) {

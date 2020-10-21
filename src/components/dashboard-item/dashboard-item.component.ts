@@ -418,7 +418,6 @@ export class DashboardItem extends LitElement {
         this.rect = EmptyRect;
       }
 
-      console.log('relayout me', changedProperties);
       this.layoutService?.layoutItem(this);
     }
   }

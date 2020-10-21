@@ -6,10 +6,9 @@ import {
   property,
   query,
 } from 'lit-element';
-import { uniqueId } from 'lodash-es';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { delay, mergeMap, tap } from 'rxjs/operators';
-import { initMonacoScript } from './init-monaco-script';
+import { monacoScript } from './init-monaco-script';
 
 @customElement('cff-monaco-editor')
 export class MonacoEditor extends LitElement {
@@ -78,23 +77,25 @@ export class MonacoEditor extends LitElement {
     this.setMonacoFocus();
   }
 
-  uuid = uniqueId('monaco_editor');
+  uuid = this.generateUUID();
   #ready = false;
 
   #ready$ = new Subject<void>();
   #queueMessage = new ReplaySubject<any>(10);
   #queueMessageSubscription = Subscription.EMPTY;
 
+  generateUUID() {
+    return 'ss-s-s-s-sss'.replace(/s/g, this.uuidPart);
+  }
+
+  uuidPart() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
   connectedCallback() {
-    this.monacoScript = initMonacoScript(
-      this.libPath,
-      this.value,
-      this.language,
-      this.theme,
-      this.#focus,
-      this.uuid,
-      { ...this.monacoEditorOption, ...{ readOnly: this.readonly } }
-    );
+    this.monacoScript = monacoScript;
     window.addEventListener('message', this.handleMessage, false);
     super.connectedCallback();
 
@@ -118,6 +119,8 @@ export class MonacoEditor extends LitElement {
   render() {
     return html`<iframe
       id="code-editor-iframe"
+      data-uuid=${this.uuid}
+      data-lib-path=${this.libPath}
       frameborder="0"
       srcdoc=${this.monacoScript}
     ></iframe>`;
