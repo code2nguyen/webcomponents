@@ -65,7 +65,7 @@ export const Demo = () => html`
     }
   </style>
   <cff-dashboard-layout
-    style="width: 800px;height: 300px}"
+    style="width: 800px;height: 300px"
     editable="true"
     scrollableParentSelector="viewport"
   >
