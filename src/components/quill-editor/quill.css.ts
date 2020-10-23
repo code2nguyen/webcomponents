@@ -1420,13 +1420,15 @@ export const styles = [
       font-family: var(--quill-editor-text-font, 'RedHatText');
       font-weight: 700;
     }
-    .ql-editor h1 {
+    .quill-editor .ql-editor h1 {
       font-family: var(--quill-editor-text-display-font, 'RedHatDisplay');
       font-weight: 900;
+      font-size: 1.5rem;
     }
-    .ql-editor h2 {
+    .quill-editor .ql-editor h2 {
       font-family: var(--quill-editor-text-display-font, 'RedHatDisplay');
       font-weight: 700;
+      font-size: 1.1rem;
     }
 
     .ql-bubble .ql-tooltip {
