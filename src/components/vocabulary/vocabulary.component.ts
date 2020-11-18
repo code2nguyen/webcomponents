@@ -118,6 +118,9 @@ export class VocabularyComponent extends LitElement {
       this._value = [this.emptyItem];
     } else {
       this._value = [...value];
+      if (!this._value[this.value.length - 1].isNew) {
+        this._value.push(this.emptyItem);
+      }
     }
     this.requestUpdate('value', oldValue);
   }
@@ -169,7 +172,7 @@ export class VocabularyComponent extends LitElement {
 
     if (item.isNew && item.word) {
       const newItem = this.emptyItem;
-      item.isNew = false;
+      delete item.isNew;
       this.openItemId = item.id;
       this.value.push({ ...newItem });
     }
