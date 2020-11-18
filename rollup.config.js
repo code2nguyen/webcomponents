@@ -9,7 +9,13 @@ const extensions = ['.js', '.ts'];
 
 const commonPlugins = [
   json(),
-  commonJS(),
+  commonJS({
+    namedExports: {
+      esrever: ['reverse'],
+      'react-dom': ['findDOMNode'],
+      'react-dom/server': ['renderToStaticMarkup'],
+    },
+  }),
   resolve({ module: true, jsnext: true, extensions }),
   postcss(),
   terser({ keep_classnames: true, keep_fnames: true }),
@@ -21,7 +27,7 @@ const es6Bundle = {
     dir: 'dist',
     entryFileNames: 'bundle/webcomponents.js',
     format: 'cjs',
-    name: 'calendar-clock',
+    name: 'c2n_webcomponents',
     sourcemap: true,
   },
   plugins: [typescript(), ...commonPlugins],

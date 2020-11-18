@@ -8,6 +8,7 @@ import {
 } from 'lit-element';
 import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { delay, mergeMap, tap } from 'rxjs/operators';
+import { generateUUID } from '../../shared/utils';
 import { monacoScript } from './init-monaco-script';
 
 @customElement('cff-monaco-editor')
@@ -77,22 +78,12 @@ export class MonacoEditor extends LitElement {
     this.setMonacoFocus();
   }
 
-  uuid = this.generateUUID();
+  uuid = generateUUID();
   #ready = false;
 
   #ready$ = new Subject<void>();
   #queueMessage = new ReplaySubject<any>(10);
   #queueMessageSubscription = Subscription.EMPTY;
-
-  generateUUID() {
-    return 'ss-s-s-s-sss'.replace(/s/g, this.uuidPart);
-  }
-
-  uuidPart() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
 
   connectedCallback() {
     this.monacoScript = monacoScript;

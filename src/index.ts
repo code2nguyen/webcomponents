@@ -8,3 +8,6 @@ export { DeleteConfirmation } from './components/delete-confirmation/delete-conf
 export { TabMenu } from './components/tab-menu/tab-menu.component';
 export { MonacoEditor } from './components/monaco-editor/monaco-editor.component';
 export { MonacoEditorToolbar } from './components/monaco-editor-toolbar/monaco-editor-toolbar.component';
+
+export { VocabularyComponent } from './components/vocabulary/vocabulary.component';
+export { VocabularyItem } from './components/vocabulary/vocabulary-item.component';

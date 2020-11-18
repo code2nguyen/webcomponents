@@ -113,6 +113,18 @@
         padding: 0;
         margin: 0;
         width: 100%;
+        --slate-lit-text-color: #c2c5cc;
+        --slate-lit-bg-color: transparent;
+        --slate-lit-code-background-color: hsl(220, 11%, 10%);
+        --slate-lit-highlight-color: hsl(60, 100%, 50%);
+        --slate-lit-rich-text-editor-padding: 0px 0px 0px 16px;
+      }
+      .monaco-editor-item {
+        --dashboard-item-content-margin: 8px 0 32px 0;
+        --dashboard-theme-item-bg-color-0: #282c34 !important;
+      }
+      .vocabulary {
+        --dashboard-item-content-margin: 0px 0 32px 0;
       }
     </style>
   </head>
@@ -120,6 +132,9 @@
     <script src="./highlight.pack.js" lang="javascript"></script>
     <script type="module">
       import { html, render } from 'lit-html';
+      import '@material/mwc-menu';
+      import '@material/mwc-list/mwc-list-item';
+
       import '../dist/index.js';
       let editable = true;
       const toggleEditable = function () {
@@ -136,12 +151,7 @@
       function renderDashboard() {
         render(
           html`
-            <style>
-              .monaco-editor-item {
-                --dashboard-item-content-margin: 8px 0 32px 0;
-                --dashboard-theme-item-bg-color-0: #282c34 !important;
-              }
-            </style>
+            <style></style>
             <div style="width: 500px; height: 48px; margin: 32px">
               <cff-search-input loading="true"></cff-search-input>
             </div>
@@ -150,7 +160,7 @@
               scrollableParentSelector="viewport"
               @layout-change=${layoutChangeHandler}
             >
-              <cff-dashboard-item cols="6" rows="30">
+              <cff-dashboard-item cols="6" rows="10">
                 <cff-quill-editor
                   format="html"
                   .content=${quillContent}
@@ -170,29 +180,8 @@
                   slot="toolbar"
                 ></cff-monaco-editor-toolbar>
               </cff-dashboard-item>
-              <cff-dashboard-item>
-                <cff-quill-editor></cff-quill-editor>
-                <cff-quill-editor-toolbar
-                  slot="toolbar"
-                ></cff-quill-editor-toolbar>
-              </cff-dashboard-item>
-              <cff-dashboard-item>
-                <cff-quill-editor></cff-quill-editor>
-                <cff-quill-editor-toolbar
-                  slot="toolbar"
-                ></cff-quill-editor-toolbar>
-              </cff-dashboard-item>
-              <cff-dashboard-item>
-                <cff-quill-editor></cff-quill-editor>
-                <cff-quill-editor-toolbar
-                  slot="toolbar"
-                ></cff-quill-editor-toolbar>
-              </cff-dashboard-item>
-              <cff-dashboard-item>
-                <cff-quill-editor></cff-quill-editor>
-                <cff-quill-editor-toolbar
-                  slot="toolbar"
-                ></cff-quill-editor-toolbar>
+              <cff-dashboard-item class="vocabulary" cols="6" rows="30">
+                <cff-vocabulary></cff-vocabulary>
               </cff-dashboard-item>
             </cff-dashboard-layout>
           `,

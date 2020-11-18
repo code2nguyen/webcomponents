@@ -352,3 +352,13 @@ export function getDistance(a: Point, b: Point): number {
 export function calc(exp: string): string {
   return `calc(${exp})`;
 }
+
+export function uuidPart(): string {
+  return Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+}
+
+export function generateUUID(): string {
+  return 'ss-s-s-s-sss'.replace(/s/g, uuidPart);
+}

@@ -1,5 +1,3 @@
-import { css } from 'lit-element';
-
 declare const window: any;
 
 export class Range {

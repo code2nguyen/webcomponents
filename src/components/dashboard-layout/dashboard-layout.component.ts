@@ -64,7 +64,7 @@ export class DashboardLayout extends LitElement {
       display: block;
       position: relative;
       background-color: var(--dashboard-theme-color, #303236);
-      margin: 8px;
+      margin: 8px 16px;
     }
 
     .dashboard-layout__placeholder {

@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "build:bundle": "npm run build && npm run rollup && cp package.json dist && cp README.md dist && cp custom-elements.json dist",
+    "prepublish": "rimraf -rf dist && npm run build && npm run rollup && cp package-publish.json dist/package.json && cp README.md dist && cp custom-elements.json dist",
     "rollup": "rollup -c",
     "clean": "rimraf my-element.{d.ts,d.ts.map,js,js.map} test/my-element.{d.ts,d.ts.map,js,js.map} test/my-element_test.{d.ts,d.ts.map,js,js.map}",
     "lint": "npm run lint:eslint && npm run lint:prettier",
@@ -45,7 +45,8 @@
   "author": "code2nguyen",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://registry.npmjs.com"
+    "registry": "https://registry.npmjs.com",
+    "access": "public"
   },
   "homepage": "https://github.com/code2nguyen/webcomponents.git",
   "repository": {
@@ -55,13 +56,16 @@
   "dependencies": {
     "@material/mwc-circular-progress-four-color": "^0.19.1",
     "@material/mwc-menu": "^0.19.1",
-    "highlight.js": "^10.2.0",
     "lit-element": "2.4.0",
     "lit-html": "1.3.0",
     "lodash-es": "^4.17.15",
+    "slate": "0.59.0",
+    "highlight.js": "^10.2.0",
     "monaco-editor": "^0.21.2",
     "quill": "1.3.7",
-    "rxjs": "6.6.3"
+    "rxjs": "6.6.3",
+    "@c2n/slate-lit": "^1.0.0",
+    "tslib": "^2.0.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
@@ -102,7 +106,6 @@
     "rollup-plugin-postcss": "^2.5.0",
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript": "^1.0.1",
-    "tslib": "2.0.1",
     "typescript": "4.0.3",
     "web-component-analyzer": "^1.0.3"
   },
