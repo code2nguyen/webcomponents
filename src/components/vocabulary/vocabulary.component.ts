@@ -32,6 +32,14 @@ export class VocabularyComponent extends LitElement {
       margin: 0px;
       border-bottom: 1px solid rgba(182, 189, 204, 0.2);
     }
+    .remove {
+      transform: translateX(-100%);
+    }
+    .item {
+      transition: transform 325ms cubic-bezier(0.69, 0.23, 0.17, 0.99),
+        max-height 225ms cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: #303236;
+    }
   `;
 
   private get emptyItem(): ExtraVocabulary {
@@ -43,71 +51,71 @@ export class VocabularyComponent extends LitElement {
     };
   }
 
-  // private _value: ExtraVocabulary[] = [
-  //   {
-  //     id: '1',
-  //     word: 'Bonjour',
-  //     meaning: [
-  //       {
-  //         type: 'paragraph',
-  //         children: [
-  //           {
-  //             text:
-  //               "Since it's rich text, you can do things like turn a selection of text ",
-  //           },
-  //           { text: 'bold', bold: true },
-  //           {
-  //             text:
-  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: '2',
-  //     word: 'Have a good day',
-  //     meaning: [
-  //       {
-  //         type: 'paragraph',
-  //         children: [
-  //           {
-  //             text:
-  //               "Since it's rich text, you can do things like turn a selection of text ",
-  //           },
-  //           { text: 'bold', bold: true },
-  //           {
-  //             text:
-  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: '3',
-  //     word: 'Bonjour',
-  //     meaning: [
-  //       {
-  //         type: 'paragraph',
-  //         children: [
-  //           {
-  //             text:
-  //               "Since it's rich text, you can do things like turn a selection of text ",
-  //           },
-  //           { text: 'bold', bold: true },
-  //           {
-  //             text:
-  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   { ...this.emptyItem },
-  // ];
+  private _value: ExtraVocabulary[] = [
+    {
+      id: '1',
+      word: 'Bonjour',
+      meaning: [
+        {
+          type: 'paragraph',
+          children: [
+            {
+              text:
+                "Since it's rich text, you can do things like turn a selection of text ",
+            },
+            { text: 'bold', bold: true },
+            {
+              text:
+                ', or add a semantically rendered block quote in the middle of the page, like this:',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: '2',
+      word: 'Have a good day',
+      meaning: [
+        {
+          type: 'paragraph',
+          children: [
+            {
+              text:
+                "Since it's rich text, you can do things like turn a selection of text ",
+            },
+            { text: 'bold', bold: true },
+            {
+              text:
+                ', or add a semantically rendered block quote in the middle of the page, like this:',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: '3',
+      word: 'Bonjour',
+      meaning: [
+        {
+          type: 'paragraph',
+          children: [
+            {
+              text:
+                "Since it's rich text, you can do things like turn a selection of text ",
+            },
+            { text: 'bold', bold: true },
+            {
+              text:
+                ', or add a semantically rendered block quote in the middle of the page, like this:',
+            },
+          ],
+        },
+      ],
+    },
+    { ...this.emptyItem },
+  ];
 
-  private _value: ExtraVocabulary[] = [this.emptyItem];
+  // private _value: ExtraVocabulary[] = [this.emptyItem];
   @property({ type: Array })
   public get value() {
     return this._value;
@@ -136,6 +144,8 @@ export class VocabularyComponent extends LitElement {
         item => item.id,
         item =>
           html`<cff-vocabulary-item
+              class="item"
+              id=${item.id}
               .item=${item}
               .readOnly=${this.readOnly}
               @openClick=${this.onOpenClick}

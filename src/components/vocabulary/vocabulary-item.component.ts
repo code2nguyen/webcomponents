@@ -26,6 +26,8 @@ export class VocabularyItem extends LitElement {
     .item {
       display: flex;
       flex-direction: column;
+      transition: background-color 225ms cubic-bezier(0.13, 0.53, 0.81, 0.4)
+        100ms;
     }
 
     .word {
@@ -50,10 +52,12 @@ export class VocabularyItem extends LitElement {
       flex: 1;
     }
     .open {
-      background-color: #2a2b2e;
+      background-color: rgba(42, 43, 46, 0.8);
     }
     .open > .meaning {
       display: flex;
+      opacity: 1;
+      /* animation: displayMeaning 225ms ease-out; */
     }
 
     .close {
@@ -65,11 +69,22 @@ export class VocabularyItem extends LitElement {
     }
     .close > .meaning {
       display: none;
+      opacity: 0;
+    }
+
+    @keyframes displayMeaning {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: auto;
+      }
     }
 
     .close > .seperator {
       display: none;
     }
+
     .action-bar {
       display: flex;
       fill: var(--vocabulary-word-color, #dfe3eb);
@@ -77,7 +92,7 @@ export class VocabularyItem extends LitElement {
       right: 8px;
       top: 10px;
       opacity: 0;
-      transition: opacity 225ms ease-out, transform 325ms ease-in-out;
+      transition: opacity 225ms ease-out;
     }
 
     .arrow_down,
@@ -85,6 +100,9 @@ export class VocabularyItem extends LitElement {
       width: 18px;
       height: 18px;
       cursor: pointer;
+    }
+    .arrow_down {
+      transition: transform 225ms ease-in-out;
     }
     .remove {
       padding-right: 8px;
@@ -96,7 +114,7 @@ export class VocabularyItem extends LitElement {
       opacity: 1;
     }
 
-    .open .arrow_down {
+    .open-header .arrow_down {
       transform: rotateX(180deg);
     }
 
@@ -106,6 +124,21 @@ export class VocabularyItem extends LitElement {
       border: 0px;
       margin: 0px;
       border-bottom: 1px solid rgba(182, 189, 204, 0.2);
+    }
+    .new-item {
+      animation: newItem 350ms ease-in-out forwards;
+    }
+
+    @keyframes newItem {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   `;
 
@@ -120,12 +153,14 @@ export class VocabularyItem extends LitElement {
     if (oldValue && oldValue.id === value.id && oldValue.isNew === value.isNew)
       return;
     this._item = { ...value };
+    this.openClasses['new-item'] = !!value.isNew;
     this.requestUpdate('item', oldValue);
   }
 
   @property({ type: Boolean }) readOnly = false;
 
   @query('.meaning') meaningTextInput?: HTMLElement;
+  @query('.arrow_down') arrowButton?: HTMLElement;
 
   private _open = false;
   @property({ type: Boolean })
@@ -137,11 +172,18 @@ export class VocabularyItem extends LitElement {
     const oldValue = this._open;
     this._open = value;
     this.openClasses.open = value;
+    this.openClasses['open-header'] = value;
     this.openClasses.close = !value;
     this.requestUpdate('open', oldValue);
   }
 
-  openClasses = { open: false, close: true };
+  openClasses = {
+    open: false,
+    close: true,
+    'open-header': false,
+    'new-item': false,
+  };
+
   render() {
     return html`
       <div class="item ${classMap(this.openClasses)}" @click=${this.onClick}>
@@ -191,23 +233,51 @@ export class VocabularyItem extends LitElement {
 
   removeItem(event: Event) {
     event.stopPropagation();
-    this.dispatchEvent(new CustomEvent('moveItem', { detail: this.item }));
+    this.addEventListener('transitionend', this.onRemoveTransitionEnd);
+    this.classList.add('remove');
   }
 
   toggleOpen(event: Event) {
     event.stopPropagation();
-    if (this.open) {
-      this.dispatchEvent(new CustomEvent('openClick', { detail: null }));
-    } else {
-      this.dispatchEvent(new CustomEvent('openClick', { detail: this.item }));
-    }
+    this.openClasses['open-header'] = !this.open;
+    this.requestUpdate();
+    this.arrowButton?.addEventListener(
+      'transitionend',
+      this.onArrowTransitionEnd
+    );
   }
 
   onClick() {
     if (!this.open) {
-      this.dispatchEvent(new CustomEvent('openClick', { detail: this.item }));
+      this.openClasses['open-header'] = true;
+      this.requestUpdate();
+      if (this.arrowButton) {
+        this.arrowButton?.addEventListener(
+          'transitionend',
+          this.onArrowTransitionEnd
+        );
+      } else {
+        this.dispatchEvent(new CustomEvent('openClick', { detail: this.item }));
+      }
     }
   }
+
+  onArrowTransitionEnd = (event: Event) => {
+    this.arrowButton?.removeEventListener(
+      'transitionend',
+      this.onArrowTransitionEnd
+    );
+    this.dispatchEvent(
+      new CustomEvent('openClick', {
+        detail: this.openClasses['open-header'] ? this.item : null,
+      })
+    );
+  };
+
+  onRemoveTransitionEnd = (event: Event) => {
+    this.removeEventListener('transitionend', this.onRemoveTransitionEnd);
+    this.dispatchEvent(new CustomEvent('moveItem', { detail: this.item }));
+  };
 
   onWordChange(event: KeyboardEvent) {
     this.item.word = (event.target as HTMLInputElement).value;
