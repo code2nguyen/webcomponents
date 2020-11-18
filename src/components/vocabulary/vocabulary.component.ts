@@ -7,7 +7,8 @@ import {
   property,
 } from 'lit-element';
 import { generateUUID } from '../../shared/utils';
-import { NEW_ITEM_ID, Vocabulary } from './vocabulary';
+import { ExtraVocabulary } from './vocabulary';
+import { repeat } from 'lit-html/directives/repeat.js';
 
 @customElement('cff-vocabulary')
 export class VocabularyComponent extends LitElement {
@@ -33,76 +34,80 @@ export class VocabularyComponent extends LitElement {
     }
   `;
 
-  private emptyItem: Vocabulary = {
-    id: NEW_ITEM_ID,
-    word: '',
-    meaning: [],
-  };
+  private get emptyItem(): ExtraVocabulary {
+    return {
+      id: generateUUID(),
+      word: '',
+      meaning: [],
+      isNew: true,
+    };
+  }
 
-  private _value: Vocabulary[] = [
-    {
-      id: '1',
-      word: 'Bonjour',
-      meaning: [
-        {
-          type: 'paragraph',
-          children: [
-            {
-              text:
-                "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-              text:
-                ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: '2',
-      word: 'Have a good day',
-      meaning: [
-        {
-          type: 'paragraph',
-          children: [
-            {
-              text:
-                "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-              text:
-                ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: '3',
-      word: 'Bonjour',
-      meaning: [
-        {
-          type: 'paragraph',
-          children: [
-            {
-              text:
-                "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-              text:
-                ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-          ],
-        },
-      ],
-    },
-    { ...this.emptyItem },
-  ];
+  // private _value: ExtraVocabulary[] = [
+  //   {
+  //     id: '1',
+  //     word: 'Bonjour',
+  //     meaning: [
+  //       {
+  //         type: 'paragraph',
+  //         children: [
+  //           {
+  //             text:
+  //               "Since it's rich text, you can do things like turn a selection of text ",
+  //           },
+  //           { text: 'bold', bold: true },
+  //           {
+  //             text:
+  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '2',
+  //     word: 'Have a good day',
+  //     meaning: [
+  //       {
+  //         type: 'paragraph',
+  //         children: [
+  //           {
+  //             text:
+  //               "Since it's rich text, you can do things like turn a selection of text ",
+  //           },
+  //           { text: 'bold', bold: true },
+  //           {
+  //             text:
+  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: '3',
+  //     word: 'Bonjour',
+  //     meaning: [
+  //       {
+  //         type: 'paragraph',
+  //         children: [
+  //           {
+  //             text:
+  //               "Since it's rich text, you can do things like turn a selection of text ",
+  //           },
+  //           { text: 'bold', bold: true },
+  //           {
+  //             text:
+  //               ', or add a semantically rendered block quote in the middle of the page, like this:',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   { ...this.emptyItem },
+  // ];
 
+  private _value: ExtraVocabulary[] = [this.emptyItem];
   @property({ type: Array })
   public get value() {
     return this._value;
@@ -110,23 +115,29 @@ export class VocabularyComponent extends LitElement {
   public set value(value) {
     const oldValue = this._value;
     if (!value || value.length === 0) {
-      this._value = [{ ...this.emptyItem }];
+      this._value = [this.emptyItem];
     } else {
-      this._value = value;
+      this._value = [...value];
     }
     this.requestUpdate('value', oldValue);
   }
 
-  @internalProperty() openItemId = NEW_ITEM_ID;
+  @property({ type: Boolean }) readOnly = false;
+
+  @internalProperty() openItemId = '';
 
   render() {
     return html`
-      ${this.value.map(
+      ${repeat(
+        this.value,
+        item => item.id,
         item =>
           html`<cff-vocabulary-item
               .item=${item}
+              .readOnly=${this.readOnly}
               @openClick=${this.onOpenClick}
               @itemChange=${this.onItemChange}
+              @moveItem=${this.onRemoveItem}
               ?open=${item.id === this.openItemId}
             ></cff-vocabulary-item>
             <hr class="seperator" />`
@@ -135,20 +146,49 @@ export class VocabularyComponent extends LitElement {
   }
 
   onOpenClick(event: CustomEvent) {
-    this.openItemId = event.detail.id;
+    if (event.detail) {
+      this.openItemId = event.detail.id;
+    } else {
+      this.openItemId = '';
+    }
+  }
+
+  onRemoveItem(event: CustomEvent) {
+    const item: ExtraVocabulary = event.detail;
+    const valueIndex = this.value.findIndex(i => i.id === item.id);
+    this.value = [
+      ...this.value.slice(0, valueIndex),
+      ...this.value.slice(valueIndex + 1),
+    ];
+    this.requestUpdate();
+    this.dispatchValueChange();
   }
 
   onItemChange(event: CustomEvent) {
-    const item: Vocabulary = event.detail;
+    const item: ExtraVocabulary = { ...event.detail };
 
-    if (item.id === NEW_ITEM_ID) {
-      item.id = generateUUID();
+    if (item.isNew && item.word) {
+      const newItem = this.emptyItem;
+      item.isNew = false;
       this.openItemId = item.id;
-      this.value.push({ ...this.emptyItem });
-      this.requestUpdate();
+      this.value.push({ ...newItem });
     }
+    if (this.openItemId !== item.id) {
+      this.openItemId = item.id;
+    }
+    const valueIndex = this.value.findIndex(i => i.id === item.id);
+    this.value = [
+      ...this.value.slice(0, valueIndex),
+      item,
+      ...this.value.slice(valueIndex + 1),
+    ];
+    this.requestUpdate();
+    this.dispatchValueChange();
+  }
+
+  private dispatchValueChange() {
     this.dispatchEvent(
-      new CustomEvent('valueChange', {
+      new CustomEvent('value-changed', {
         detail: this.value.slice(0, this.value.length - 1),
       })
     );

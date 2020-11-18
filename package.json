@@ -1,6 +1,6 @@
 {
   "name": "@c2n/webcomponents",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Webcomponent following open-wc recommendations",
   "main": "index.js",
   "module": "index.js",
@@ -60,12 +60,15 @@
     "lit-html": "1.3.0",
     "lodash-es": "^4.17.15",
     "slate": "0.59.0",
+    "slate-history": "^0.59.0",
     "highlight.js": "^10.2.0",
     "monaco-editor": "^0.21.2",
     "quill": "1.3.7",
     "rxjs": "6.6.3",
     "@c2n/slate-lit": "^1.0.0",
-    "tslib": "^2.0.1"
+    "tslib": "^2.0.1",
+    "direction": "^1.0.4",
+    "is-hotkey": "^0.1.6"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",

@@ -11,7 +11,7 @@ import '@c2n/slate-lit/rich-text-editor.component';
 import '@c2n/slate-lit/toolbar.component';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { NEW_ITEM_ID, Vocabulary } from './vocabulary';
+import { ExtraVocabulary } from './vocabulary';
 export declare const window: any;
 
 @customElement('cff-vocabulary-item')
@@ -40,7 +40,7 @@ export class VocabularyItem extends LitElement {
       font-weight: 300;
       padding: 0;
       flex-basis: 22px;
-      padding: 8px 0px 8px 16px;
+      padding: 8px 64px 8px 16px;
     }
 
     .meaning {
@@ -70,19 +70,36 @@ export class VocabularyItem extends LitElement {
     .close > .seperator {
       display: none;
     }
-    .arrow_down {
-      width: 18px;
-      height: 18px;
+    .action-bar {
+      display: flex;
       fill: var(--vocabulary-word-color, #dfe3eb);
       position: absolute;
       right: 8px;
       top: 10px;
       opacity: 0;
-      transition: opacity 0.1s ease-out;
+      transition: opacity 225ms ease-out, transform 325ms ease-in-out;
     }
-    .close:hover .arrow_down {
+
+    .arrow_down,
+    .remove {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .remove {
+      padding-right: 8px;
+    }
+    .close:hover .action-bar {
       opacity: 1;
     }
+    .open:hover .action-bar {
+      opacity: 1;
+    }
+
+    .open .arrow_down {
+      transform: rotateX(180deg);
+    }
+
     .seperator {
       width: 100%;
       height: 0px;
@@ -92,18 +109,21 @@ export class VocabularyItem extends LitElement {
     }
   `;
 
-  private _item!: Vocabulary;
+  private _item!: ExtraVocabulary;
 
   @property({ type: Object })
-  public get item(): Vocabulary {
+  public get item(): ExtraVocabulary {
     return this._item;
   }
-  public set item(value: Vocabulary) {
+  public set item(value: ExtraVocabulary) {
     const oldValue = this._item;
-    if (oldValue && oldValue.id === value.id) return;
-    this._item = value;
+    if (oldValue && oldValue.id === value.id && oldValue.isNew === value.isNew)
+      return;
+    this._item = { ...value };
     this.requestUpdate('item', oldValue);
   }
+
+  @property({ type: Boolean }) readOnly = false;
 
   @query('.meaning') meaningTextInput?: HTMLElement;
 
@@ -130,30 +150,57 @@ export class VocabularyItem extends LitElement {
         class="word"
         spellcheck="false"
         @keyup=${this.onWordChange}
-        ?disabled=${!this.open && this.item.id !== NEW_ITEM_ID}
+        ?disabled=${!this.open && !this.item.isNew}
         ></input>
         <hr class="seperator"/>
         <rich-text-editor
                 placeholder="Meaning"
                 class="meaning"
+                .readOnly=${this.readOnly}
                 .value=${this.item.meaning}
                 @valueChange=${this.onMeaningChange}
               ></rich-text-editor>
         ${
-          !this.open && this.item.id !== NEW_ITEM_ID
-            ? html`<svg viewBox="0 0 24 24" class="arrow_down">
-                <path
-                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                />
-              </svg>`
+          !this.item.isNew
+            ? html`<div class="action-bar">
+                <svg
+                  @click=${this.removeItem}
+                  viewBox="0 0 16 16"
+                  class="remove"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
+                <svg
+                  @click=${this.toggleOpen}
+                  viewBox="0 0 24 24"
+                  class="arrow_down"
+                >
+                  <path
+                    d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                  />
+                </svg>
+              </div>`
             : ''
         }
       </div>
     `;
   }
 
-  updated() {
-    // if()
+  removeItem(event: Event) {
+    event.stopPropagation();
+    this.dispatchEvent(new CustomEvent('moveItem', { detail: this.item }));
+  }
+
+  toggleOpen(event: Event) {
+    event.stopPropagation();
+    if (this.open) {
+      this.dispatchEvent(new CustomEvent('openClick', { detail: null }));
+    } else {
+      this.dispatchEvent(new CustomEvent('openClick', { detail: this.item }));
+    }
   }
 
   onClick() {
@@ -171,10 +218,4 @@ export class VocabularyItem extends LitElement {
     this.item.meaning = event.detail;
     this.dispatchEvent(new CustomEvent('itemChange', { detail: this.item }));
   }
-
-  // onWordFocus() {
-  //   if (this.item.id !== NEW_ITEM_ID) {
-  //     this.dispatchEvent(new CustomEvent('openClick', { detail: this.item }));
-  //   }
-  // }
 }

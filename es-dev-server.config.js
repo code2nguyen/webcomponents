@@ -23,37 +23,25 @@ module.exports = {
   plugins: [
     {
       serve(context) {
-        if (
-          context.path ===
-          '/node_modules/@c2n/slate-lit/node_modules/is-hotkey/lib/index.js'
-        ) {
+        if (context.path === '/node_modules/is-hotkey/lib/index.js') {
           return {
             body: fs.readFileSync(
               path.resolve(__dirname, 'es-dev-server-override/is-hotkey.js')
             ),
           };
-        } else if (
-          context.path ===
-          '/node_modules/@c2n/slate-lit/node_modules/direction/index.js'
-        ) {
+        } else if (context.path === '/node_modules/direction/index.js') {
           return {
             body: fs.readFileSync(
               path.resolve(__dirname, 'es-dev-server-override/direction.js')
             ),
           };
-        } else if (
-          context.path ===
-          '/node_modules/@c2n/slate-lit/node_modules/esrever/esrever.js'
-        ) {
+        } else if (context.path === '/node_modules/esrever/esrever.js') {
           return {
             body: fs.readFileSync(
               path.resolve(__dirname, 'es-dev-server-override/esrever.js')
             ),
           };
-        } else if (
-          context.path ===
-          '/node_modules/@c2n/slate-lit/node_modules/esrever/esrever.js'
-        ) {
+        } else if (context.path === '/node_modules/esrever/esrever.js') {
           return {
             body: fs.readFileSync(
               path.resolve(__dirname, 'es-dev-server-override/esrever.js')
