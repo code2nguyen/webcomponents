@@ -87,10 +87,6 @@ export class SearchInput extends LitElement {
     .loading {
       position: absolute;
       right: 8px;
-      --mdc-circular-progress-bar-color-1: #ff726b;
-      --mdc-circular-progress-bar-color-2: #ff726b;
-      --mdc-circular-progress-bar-color-3: #ff726b;
-      --mdc-circular-progress-bar-color-4: #ff726b;
     }
 
     .clear-icon:hover {
