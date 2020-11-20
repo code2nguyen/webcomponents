@@ -50,6 +50,7 @@ export class VocabularyItem extends LitElement {
       font-size: var(--vocabulary-meaning-font-size, 13px);
       font-weight: 400;
       flex: 1;
+      min-height: 90px;
     }
     .open {
       background-color: rgba(42, 43, 46, 0.8);
@@ -198,6 +199,7 @@ export class VocabularyItem extends LitElement {
         <rich-text-editor
                 placeholder="Meaning"
                 class="meaning"
+                spellcheck="false"
                 .readOnly=${this.readOnly}
                 .value=${this.item.meaning}
                 @valueChange=${this.onMeaningChange}
