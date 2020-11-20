@@ -50,7 +50,6 @@ export class VocabularyItem extends LitElement {
       font-size: var(--vocabulary-meaning-font-size, 13px);
       font-weight: 400;
       flex: 1;
-      min-height: 90px;
     }
     .open {
       background-color: rgba(42, 43, 46, 0.8);
