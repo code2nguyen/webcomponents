@@ -1,6 +1,6 @@
 {
   "name": "@c2n/webcomponents",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Webcomponent following open-wc recommendations",
   "author": "Nguyen Thai Vinh<code2nguyen@gmail.com>",
   "license": "MIT",

@@ -28,7 +28,7 @@ const es6Bundle = {
     entryFileNames: 'bundle/webcomponents.js',
     format: 'cjs',
     name: 'c2n_webcomponents',
-    sourcemap: true,
+    sourcemap: false,
   },
   plugins: [typescript(), ...commonPlugins],
 };
