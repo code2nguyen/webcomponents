@@ -1413,6 +1413,10 @@ export const styles = [
       color: rgb(var(--dashboard-theme-item-text-color, 255, 255, 255));
       height: auto;
     }
+    .ql-container s {
+      font-style: italic;
+      color: rgb(var(--dashboard-theme-item-text-color, 255, 255, 255), 0.7);
+    }
     .ql-bubble *:focus {
       outline: none;
     }
